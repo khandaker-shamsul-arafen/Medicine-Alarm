@@ -20,6 +20,7 @@ dependencies:
   path_provider: ^2.0.15
   timezone: ^0.9.2
   permission_handler: ^10.2.0
+  flutter_screenutil: ^5.8.1
 
 dev_dependencies:
   flutter_test:
