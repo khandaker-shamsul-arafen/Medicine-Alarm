@@ -23,6 +23,7 @@ dependencies:
   flutter_screenutil: ^5.8.1
   animated_bottom_navigation_bar: ^1.2.0
   circular_reveal_animation: ^2.0.1
+  flutter_spinbox: ^0.13.1
 
 dev_dependencies:
   flutter_test:

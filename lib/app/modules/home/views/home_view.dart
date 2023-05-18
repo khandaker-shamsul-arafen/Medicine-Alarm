@@ -65,7 +65,11 @@ class HomeView extends GetView<HomeController> {
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
-                      return HomeCard(time: '12:03', mediceneName: 'Histasin');
+                      return const HomeCard(
+                        time: '12:03',
+                        mediceneName: 'Napa',
+                        color: AllColors.primaryColor,
+                      );
                     }),
               ),
               ConstantWidget().gapeH(16),
@@ -75,14 +79,15 @@ class HomeView extends GetView<HomeController> {
                     color: AllColors.pureBlack.withOpacity(0.6)),
               ),
               ConstantWidget().gapeH8(),
-              Container(
+              SizedBox(
                 height: 250.h,
                 child: ListView.builder(
                     itemCount: 15,
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
-                      return HomeCard(time: '12:03', mediceneName: 'Histasin');
+                      return const HomeCard(
+                          time: '12:03', mediceneName: 'Histasin');
                     }),
               ),
             ],
