@@ -58,8 +58,8 @@ class HomeView extends GetView<HomeController> {
                     color: AllColors.pureBlack.withOpacity(0.6)),
               ),
               ConstantWidget().gapeH8(),
-              Container(
-                height: 250.h,
+              SizedBox(
+                height: MediaQuery.of(context).size.height - 600.h,
                 child: ListView.builder(
                     itemCount: 15,
                     shrinkWrap: true,
@@ -80,7 +80,7 @@ class HomeView extends GetView<HomeController> {
               ),
               ConstantWidget().gapeH8(),
               SizedBox(
-                height: 250.h,
+                height: MediaQuery.of(context).size.height - 692.h,
                 child: ListView.builder(
                     itemCount: 15,
                     shrinkWrap: true,

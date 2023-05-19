@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class RunningController extends GetxController {
   //TODO: Implement RunningController
+  final isSelectWeekDay = [1, 1, 1, 1, 1, 1, 1].obs;
 
   final count = 0.obs;
 

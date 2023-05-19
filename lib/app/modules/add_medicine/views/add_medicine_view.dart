@@ -6,6 +6,7 @@ import 'package:medicine_alarm/app/constants/constant_widget.dart';
 
 import '../../../constants/all_color.dart';
 import '../../../constants/text_style.dart';
+import '../../../widget/add_time_card.dart';
 import '../../../widget/home_card.dart';
 import '../controllers/add_medicine_controller.dart';
 
@@ -144,9 +145,11 @@ class AddMedicineView extends GetView<AddMedicineController> {
               Wrap(
                 children: List.generate(
                     controller.time.value.length,
-                    (index) => HomeCard(
-                          time: '7 Pm',
-                          mediceneName: 'DRUG',
+                    (index) => Padding(
+                          padding: EdgeInsets.all(8.0.r),
+                          child: AddTimeCard(
+                            time: controller.time[index],
+                          ),
                         )),
               ),
               Center(
@@ -162,6 +165,35 @@ class AddMedicineView extends GetView<AddMedicineController> {
                   label: const Text('ADD'),
                 ),
               ),
+              ConstantWidget().gapeH(30.h),
+              TextFormField(
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                scrollPadding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 105.0, horizontal: 10.0),
+                    filled: true,
+                    border: InputBorder.none,
+                    hintText: "Add Your Note ",
+                    hintStyle: AllTextStyle().textRegularStyle()),
+              ),
+              ConstantWidget().gapeH(16.h),
+              SizedBox(
+                  width: Get.width,
+                  height: 60.h,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Save",
+                      style: AllTextStyle()
+                          .textRegularStyle16(color: AllColors.pureWhite),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AllColors.primaryColor),
+                  )),
             ],
           );
         }),
@@ -193,8 +225,8 @@ class AddMedicineView extends GetView<AddMedicineController> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      controller.time.value.add(controller.timeController);
-                      print(controller.time.value.length);
+                      controller.time.value.add(controller.timeController.text);
+                      print("sfsfsfsf" + controller.time[0]);
                       controller.timeController.text = '';
                       Navigator.of(context).pop();
                     },
