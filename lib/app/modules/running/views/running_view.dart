@@ -26,19 +26,14 @@ class RunningView extends GetView<RunningController> {
                   .textRegularStyle16(fontWeight: FontWeight.w600),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height - 450.h,
+              height: MediaQuery.of(context).size.height * 0.50,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: 10,
                   itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        ActiveAlarmCard(
-                          isSelectDay: controller.isSelectWeekDay,
-                        ),
-                        ConstantWidget().gapeH8()
-                      ],
+                    return ActiveAlarmCard(
+                      isSelectDay: controller.isSelectWeekDay,
                     );
                   }),
             ),
@@ -50,7 +45,7 @@ class RunningView extends GetView<RunningController> {
             ),
             ConstantWidget().gapeH16(),
             SizedBox(
-              height: MediaQuery.of(context).size.height - 695.h,
+              height: MediaQuery.of(context).size.height * 0.24,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
                   shrinkWrap: true,

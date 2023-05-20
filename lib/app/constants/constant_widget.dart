@@ -31,4 +31,10 @@ class ConstantWidget {
       width: 8.w,
     );
   }
+
+  Widget gapeW16() {
+    return SizedBox(
+      width: 16.w,
+    );
+  }
 }

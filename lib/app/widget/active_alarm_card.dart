@@ -4,6 +4,8 @@ import 'package:medicine_alarm/app/constants/all_color.dart';
 import 'package:medicine_alarm/app/constants/constant_widget.dart';
 import 'package:medicine_alarm/app/widget/weekly_button.dart';
 
+import '../constants/text_style.dart';
+
 class ActiveAlarmCard extends StatelessWidget {
   final Color color;
   final List isSelectDay;
@@ -12,12 +14,13 @@ class ActiveAlarmCard extends StatelessWidget {
       {Key? key, this.color = AllColors.pureWhite, required this.isSelectDay})
       : super(key: key);
   List weekName = [
-    'Sun',
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thus',
-    'Fri',
+    'S',
+    'M',
+    'T',
+    'W',
+    'T',
+    'F',
+    'S',
   ];
   List alermTime = [
     '9:00',
@@ -25,6 +28,7 @@ class ActiveAlarmCard extends StatelessWidget {
     '11:00',
     '12:00',
     '1:00',
+    '4:00',
     '4:00',
   ];
 
@@ -42,22 +46,53 @@ class ActiveAlarmCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text('Napa'),
+                Text(
+                  'Napa',
+                  style: AllTextStyle().textRegularStyle16(fontSize: 20),
+                ),
                 Spacer(),
                 IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.note_alt_outlined))
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.edit_outlined,
+                      size: 18,
+                    ))
               ],
             ),
             ConstantWidget().gapeH(10),
-            Wrap(
-                children: List.generate(
-                    weekName.length,
-                    (index) => WeeklyButton(
-                          dayName: weekName[index],
-                          dayTime: alermTime[index],
-                          isSelecDay: isSelectDay,
-                          index: index,
-                        ))),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Day: ',
+                  style: AllTextStyle().textRegularStyle(fontSize: 20),
+                ),
+                Wrap(
+                    children: List.generate(
+                        weekName.length,
+                        (index) => Column(
+                              children: [
+                                WeeklyButton(
+                                  dayName: weekName[index],
+                                  isSelecDay: isSelectDay,
+                                  index: index,
+                                ),
+                              ],
+                            ))),
+              ],
+            ),
+            ConstantWidget().gapeH16(),
+            Row(
+              children: [
+                Text('Time: '),
+                Text(
+                  alermTime.join(",  "),
+                  style: AllTextStyle()
+                      .textRegularStyle(color: AllColors.primaryColor),
+                ),
+              ],
+            ),
             ConstantWidget().gapeH16(),
             Text("With After Before Mill")
           ],

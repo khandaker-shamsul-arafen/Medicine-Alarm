@@ -5,7 +5,8 @@ class AddMedicineController extends GetxController {
   //TODO: Implement AddMedicineController
   TextEditingController textController = TextEditingController();
   final TextEditingController timeController = TextEditingController();
-  var pickedDate = DateTime.now().obs;
+  RxString pickedDate = ''.obs;
+
   RxList time = [].obs;
 
   final count = 0.0.obs;

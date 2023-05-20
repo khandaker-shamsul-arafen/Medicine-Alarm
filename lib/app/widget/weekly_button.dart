@@ -8,12 +8,10 @@ class WeeklyButton extends StatefulWidget {
   final List isSelecDay;
   final int index;
   final String dayName;
-  final String dayTime;
 
   const WeeklyButton(
       {Key? key,
       required this.dayName,
-      required this.dayTime,
       required this.index,
       required this.isSelecDay})
       : super(key: key);
@@ -28,8 +26,11 @@ class _WeeklyButtonState extends State<WeeklyButton> {
     return InkWell(
       onTap: () {
         setState(() {
-          widget.isSelecDay[widget.index] =
-              0; //running Controller Ar IsSelected  List a Add korte Hobe 0 k.
+          if (widget.isSelecDay[widget.index] == 0) {
+            widget.isSelecDay[widget.index] = 1;
+          } else if (widget.isSelecDay[widget.index] == 1) {
+            widget.isSelecDay[widget.index] = 0;
+          } //running Controller Ar IsSelected  List a Add korte Hobe 0 k.
 
           // for (var index1 = 0; index1 <widget.isSelecDay.length; index1++) {
           //   if (index1 != widget.index) {
@@ -39,12 +40,14 @@ class _WeeklyButtonState extends State<WeeklyButton> {
         });
       },
       child: Padding(
-        padding: EdgeInsets.only(right: 4.0.w),
+        padding: EdgeInsets.only(
+          right: 10.0.w,
+        ),
         child: Column(
           children: [
             Container(
-              width: 50.w,
-              height: 50.h,
+              width: 30.w,
+              height: 30.h,
               decoration: BoxDecoration(
                   color: (widget.isSelecDay[widget.index] == 1)
                       ? AllColors.primaryColor
@@ -52,15 +55,10 @@ class _WeeklyButtonState extends State<WeeklyButton> {
                   shape: BoxShape.circle),
               child: Center(
                   child: Text(widget.dayName,
-                      style: AllTextStyle()
-                          .textRegularStyle(color: AllColors.pureWhite))),
+                      style: AllTextStyle().textRegularStyle(
+                          color: AllColors.pureWhite, fontSize: 12))),
             ),
             ConstantWidget().gapeH16(),
-            Text(
-              widget.dayTime,
-              style: AllTextStyle()
-                  .textRegularStyle(color: AllColors.primaryColor),
-            ),
           ],
         ),
       ),

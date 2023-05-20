@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:medicine_alarm/app/constants/constant_widget.dart';
 
 import '../../../constants/all_color.dart';
@@ -20,188 +22,236 @@ class AddMedicineView extends GetView<AddMedicineController> {
           padding: EdgeInsets.only(top: 16.0.h, left: 16.0.w, right: 16.0.w),
           child: Obx(
             () {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: Icon(
-                      // <-- Icon
-                      Icons.cancel_outlined,
-                      size: 30.0,
-                      color: Colors.red,
+              return SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text(
+                        'Add Your Medicine Time',
+                        style: AllTextStyle().textRegularStyle16(fontSize: 20),
+                      ),
                     ),
-                    label: Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.red, fontSize: 20.sp),
+                    ConstantWidget().gapeH(16),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: "Medicine name",
+                        labelStyle: AllTextStyle().textRegularStyle16(
+                            color: AllColors.pureBlack.withOpacity(0.6)),
+                        border: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.blueGrey),
+                            borderRadius: BorderRadius.circular(10)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.blueGrey, width: 2),
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                      keyboardType: TextInputType.name,
                     ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        elevation: 0.5), // <-- Text
-                  ),
-                  ConstantWidget().gapeH(16),
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: "Medicine name",
-                      labelStyle: AllTextStyle().textRegularStyle16(
-                          color: AllColors.pureBlack.withOpacity(0.6)),
-                      border: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.blueGrey),
-                          borderRadius: BorderRadius.circular(10)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.blueGrey, width: 2),
-                          borderRadius: BorderRadius.circular(10)),
-                    ),
-                    keyboardType: TextInputType.name,
-                  ),
-                  ConstantWidget().gapeH16(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * .4,
-                        height: 45.h,
-                        child: TextField(
-                          controller: controller.textController,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.only(left: 10),
-
-                            hintMaxLines: 1,
-                            suffixIcon: InkWell(
-                              onTap: () async {
-                                controller.pickedDate.value =
-                                    (await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime.now(),
-                                  lastDate: DateTime(2050),
-                                ))!;
-                                debugPrint(
-                                    "PickDate i: ${controller.pickedDate.value}");
-                                //  if (controller.pickedDate != null &&
-                                //  controller.pickedDate.compareTo(DateTime.now()) >= -1) {
-                                //    //  widget.controller.text = pickedDate.toString();
-                                //  }
-                              },
-                              child: const Icon(
-                                Icons.calendar_month_outlined,
-                                //  color: AppColors.borderColor,
+                    ConstantWidget().gapeH16(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Container(
+                        //   width: MediaQuery.of(context).size.width * .4,
+                        //   height: 45.h,
+                        //   child: TextField(
+                        //     controller: controller.textController,
+                        //     decoration: InputDecoration(
+                        //       contentPadding: const EdgeInsets.only(left: 10),
+                        //
+                        //       hintMaxLines: 1,
+                        //       suffixIcon: InkWell(
+                        //         onTap: () async {
+                        //           controller.pickedDate.value =
+                        //               (await showDatePicker(
+                        //             context: context,
+                        //             initialDate: DateTime.now(),
+                        //             firstDate: DateTime.now(),
+                        //             lastDate: DateTime(2050),
+                        //           ))!;
+                        //           debugPrint(
+                        //               "PickDate i: ${controller.pickedDate.value}");
+                        //           //  if (controller.pickedDate != null &&
+                        //           //  controller.pickedDate.compareTo(DateTime.now()) >= -1) {
+                        //           //    //  widget.controller.text = pickedDate.toString();
+                        //           //  }
+                        //           controller.textController.text =
+                        //               controller.pickedDate.value as String;
+                        //         },
+                        //         child: const Icon(
+                        //           Icons.calendar_month_outlined,
+                        //           //  color: AppColors.borderColor,
+                        //         ),
+                        //       ),
+                        //       //fillColor: AllColors.pureWhite,
+                        //       // filled: true,
+                        //       labelText: "Start Date",
+                        //       labelStyle: AllTextStyle().textRegularStyle16(
+                        //           color: AllColors.pureBlack.withOpacity(0.6)),
+                        //       border: OutlineInputBorder(
+                        //           borderSide:
+                        //               const BorderSide(color: Colors.blueGrey),
+                        //           borderRadius: BorderRadius.circular(10)),
+                        //       focusedBorder: OutlineInputBorder(
+                        //           borderSide: const BorderSide(
+                        //               color: Colors.blueGrey, width: 2),
+                        //           borderRadius: BorderRadius.circular(10)),
+                        //     ),
+                        //     keyboardType: TextInputType.name,
+                        //   ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * .4,
+                          height: 45.h,
+                          decoration: BoxDecoration(
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 8.0.w),
+                                child: Text(controller.pickedDate.value,
+                                    style: AllTextStyle().textRegularStyle16()),
                               ),
+                              const Spacer(),
+                              IconButton(
+                                onPressed: () async {
+                                  DateTime pickedDate = (await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime.now(),
+                                    lastDate: DateTime(2050),
+                                  ))!;
+                                  if (pickedDate != null) {
+                                    print(pickedDate);
+                                    String formattedDate =
+                                        DateFormat('yyyy-MM-dd')
+                                            .format(pickedDate);
+                                    print(formattedDate);
+                                    controller.pickedDate.value =
+                                        formattedDate; //set output date to TextField value.
+                                  } else {
+                                    print("Date is not selected");
+                                  }
+                                },
+                                icon: const Icon(
+                                  Icons.calendar_month_outlined,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+
+                        Container(
+                          width: MediaQuery.of(context).size.width * .3,
+                          height: 45.h,
+                          decoration: BoxDecoration(
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: SpinBox(
+                            min: 0,
+                            max: 500,
+                            value: controller.count.value,
+                            onChanged: (value) {
+                              controller.count.value = value;
+                              print(controller.count.value);
+                            },
+                            step: 1,
+                            spacing: 0,
+                            direction: Axis.horizontal,
+                            textStyle: const TextStyle(fontSize: 16),
+                            incrementIcon:
+                                const Icon(Icons.keyboard_arrow_up, size: 24),
+                            decrementIcon:
+                                const Icon(Icons.keyboard_arrow_down, size: 24),
+                            iconColor:
+                                MaterialStateProperty.resolveWith((states) {
+                              if (states.contains(MaterialState.disabled)) {
+                                return Colors.grey;
+                              }
+                              if (states.contains(MaterialState.error)) {
+                                return Colors.red;
+                              }
+                              if (states.contains(MaterialState.focused)) {
+                                return Colors.blue;
+                              }
+                              return Colors.black;
+                            }),
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
                             ),
-                            //fillColor: AllColors.pureWhite,
-                            filled: true,
-                            labelText: "Start Date",
-                            labelStyle: AllTextStyle().textRegularStyle16(
-                                color: AllColors.pureBlack.withOpacity(0.6)),
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.blueGrey),
-                                borderRadius: BorderRadius.circular(10)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.blueGrey, width: 2),
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * .3,
-                        decoration: BoxDecoration(border: Border.all()),
-                        child: SpinBox(
-                          min: 0,
-                          max: 500,
-                          value: controller.count.value,
-                          onChanged: (value) {
-                            controller.count.value = value;
-                            print(controller.count.value);
-                          },
-                          step: 1,
-                          spacing: 0,
-                          direction: Axis.horizontal,
-                          textStyle: TextStyle(fontSize: 16),
-                          incrementIcon:
-                              Icon(Icons.keyboard_arrow_up, size: 24),
-                          decrementIcon:
-                              Icon(Icons.keyboard_arrow_down, size: 24),
-                          iconColor:
-                              MaterialStateProperty.resolveWith((states) {
-                            if (states.contains(MaterialState.disabled)) {
-                              return Colors.grey;
-                            }
-                            if (states.contains(MaterialState.error)) {
-                              return Colors.red;
-                            }
-                            if (states.contains(MaterialState.focused)) {
-                              return Colors.blue;
-                            }
-                            return Colors.black;
-                          }),
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Text('Time'),
-                  ConstantWidget().gapeH8(),
-                  Wrap(
-                    children: List.generate(
-                        controller.time.value.length,
-                        (index) => Padding(
-                              padding: EdgeInsets.all(8.0.r),
-                              child: Obx(() {
-                                return AddTimeCard(
-                                  time: controller.time[index],
-                                );
-                              }),
-                            )),
-                  ),
-                  Center(
-                    child: TextButton.icon(
-                      // <-- TextButton
-                      onPressed: () {
-                        showForm(context);
-                      },
-                      icon: const Icon(
-                        Icons.add,
-                        size: 24.0,
-                      ),
-                      label: const Text('ADD'),
+                      ],
                     ),
-                  ),
-                  ConstantWidget().gapeH(30.h),
-                  TextFormField(
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    scrollPadding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 105.0, horizontal: 10.0),
-                        filled: true,
-                        border: InputBorder.none,
-                        hintText: "Add Your Note ",
-                        hintStyle: AllTextStyle().textRegularStyle()),
-                  ),
-                  ConstantWidget().gapeH(16.h),
-                  SizedBox(
-                      width: Get.width,
-                      height: 60.h,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: AllColors.primaryColor),
-                        child: Text(
-                          "Save",
-                          style: AllTextStyle()
-                              .textRegularStyle16(color: AllColors.pureWhite),
+                    ConstantWidget().gapeH8(),
+                    const Text('Time'),
+                    ConstantWidget().gapeH8(),
+                    Wrap(
+                      children: List.generate(
+                          controller.time.value.length,
+                          (index) => Padding(
+                                padding: EdgeInsets.all(8.0.r),
+                                child: Obx(() {
+                                  return AddTimeCard(
+                                    time: controller.time[index],
+                                  );
+                                }),
+                              )),
+                    ),
+                    Center(
+                      child: TextButton.icon(
+                        // <-- TextButton
+                        onPressed: () {
+                          showForm(context);
+                        },
+                        icon: const Icon(
+                          Icons.add,
+                          size: 24.0,
                         ),
-                      )),
-                ],
+                        label: const Text('ADD'),
+                      ),
+                    ),
+                    ConstantWidget().gapeH(16.h),
+                    Wrap(
+                      children: [
+                        TextFormField(
+                          // maxLines: 2,
+                          maxLength: 100,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.blueGrey),
+                                  borderRadius: BorderRadius.circular(10)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.blueGrey, width: 2),
+                                  borderRadius: BorderRadius.circular(10)),
+                              hintText: "Add Your Note ",
+                              hintStyle: AllTextStyle().textRegularStyle()),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20.0.h),
+                          child: SizedBox(
+                              width: Get.width,
+                              height: 60.h,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: AllColors.primaryColor),
+                                child: Text(
+                                  "Save",
+                                  style: AllTextStyle().textRegularStyle16(
+                                      color: AllColors.pureWhite),
+                                ),
+                              )),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               );
             },
           ),
@@ -230,6 +280,8 @@ class AddMedicineView extends GetView<AddMedicineController> {
                 children: [
                   TextField(
                     controller: controller.timeController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: const InputDecoration(hintText: 'Time'),
                   ),
                   ElevatedButton(

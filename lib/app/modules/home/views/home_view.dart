@@ -53,13 +53,13 @@ class HomeView extends GetView<HomeController> {
               ),
               ConstantWidget().gapeH(16),
               Text(
-                'Todays Schedule ',
+                'Recent Medicine Time ',
                 style: AllTextStyle().textRegularStyle16(
                     color: AllColors.pureBlack.withOpacity(0.6)),
               ),
               ConstantWidget().gapeH8(),
               SizedBox(
-                height: MediaQuery.of(context).size.height - 600.h,
+                height: MediaQuery.of(context).size.height * 0.30,
                 child: ListView.builder(
                     itemCount: 15,
                     shrinkWrap: true,
@@ -80,7 +80,7 @@ class HomeView extends GetView<HomeController> {
               ),
               ConstantWidget().gapeH8(),
               SizedBox(
-                height: MediaQuery.of(context).size.height - 705.h,
+                height: MediaQuery.of(context).size.height * 0.27,
                 child: ListView.builder(
                     itemCount: 15,
                     shrinkWrap: true,
