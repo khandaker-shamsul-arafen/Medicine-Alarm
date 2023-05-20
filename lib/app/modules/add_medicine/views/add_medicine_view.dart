@@ -216,7 +216,7 @@ class AddMedicineView extends GetView<AddMedicineController> {
         elevation: 5,
         isScrollControlled: true,
         builder: (_) => Container(
-          height: 400,
+              height: 400,
               padding: EdgeInsets.only(
                 top: 15,
                 left: 15,
