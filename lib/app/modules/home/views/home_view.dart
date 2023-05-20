@@ -21,23 +21,32 @@ class HomeView extends GetView<HomeController> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Next Medicine ',
-                style: AllTextStyle().textRegularStyle16(
-                    color: AllColors.pureBlack.withOpacity(0.6)),
+              Center(
+                child: Text(
+                  'Next Medicine Taking time ',
+                  style: AllTextStyle().textRegularStyle16(
+                      color: AllColors.pureBlack.withOpacity(0.6),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
               ),
-              ConstantWidget().gapeH8(),
+              ConstantWidget().gapeH16(),
               Container(
                 height: 110.h,
                 width: Get.width,
                 decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: AllColors.grey.withOpacity(0.4),
-                ),
+                    shape: BoxShape.rectangle,
+                    color: AllColors.grey.withOpacity(0.4),
+                    borderRadius: BorderRadius.circular(10)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    Text(
+                      "01 : 03 PM",
+                      style: AllTextStyle()
+                          .textRegularStyle(color: AllColors.primaryColor),
+                    ),
                     Text(
                       "01 : 03 PM",
                       style: AllTextStyle()
@@ -78,18 +87,18 @@ class HomeView extends GetView<HomeController> {
                 style: AllTextStyle().textRegularStyle16(
                     color: AllColors.pureBlack.withOpacity(0.6)),
               ),
-              ConstantWidget().gapeH8(),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.27,
-                child: ListView.builder(
-                    itemCount: 15,
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (BuildContext context, int index) {
-                      return const HomeCard(
-                          time: '12:03', mediceneName: 'Histasin');
-                    }),
-              ),
+              // ConstantWidget().gapeH8(),
+              // SizedBox(
+              //   height: MediaQuery.of(context).size.height * 0.27,
+              //   child: ListView.builder(
+              //       itemCount: 15,
+              //       shrinkWrap: true,
+              //       physics: const BouncingScrollPhysics(),
+              //       itemBuilder: (BuildContext context, int index) {
+              //         return const HomeCard(
+              //             time: '12:03', mediceneName: 'Histasin');
+              //       }),
+              // ),
             ],
           ),
         ),

@@ -42,6 +42,7 @@ class BottomNavigationBarView extends GetView<BottomNavigationBarController> {
           activeIndex: controller.currentIndex.value,
           height: 80.h,
           activeColor: AllColors.pureWhite,
+          inactiveColor: AllColors.pureWhite.withOpacity(0.7),
           backgroundColor: AllColors.primaryColor,
           gapLocation: GapLocation.center,
           notchSmoothness: NotchSmoothness.verySmoothEdge,
