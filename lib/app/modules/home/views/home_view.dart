@@ -80,7 +80,7 @@ class HomeView extends GetView<HomeController> {
               ),
               ConstantWidget().gapeH8(),
               SizedBox(
-                height: MediaQuery.of(context).size.height - 692.h,
+                height: MediaQuery.of(context).size.height - 705.h,
                 child: ListView.builder(
                     itemCount: 15,
                     shrinkWrap: true,

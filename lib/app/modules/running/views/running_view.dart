@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 import 'package:medicine_alarm/app/constants/all_color.dart';
 import 'package:medicine_alarm/app/constants/constant_widget.dart';
@@ -51,7 +50,7 @@ class RunningView extends GetView<RunningController> {
             ),
             ConstantWidget().gapeH16(),
             SizedBox(
-              height: MediaQuery.of(context).size.height - 681.h,
+              height: MediaQuery.of(context).size.height - 695.h,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
                   shrinkWrap: true,

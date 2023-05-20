@@ -7,7 +7,6 @@ import 'package:medicine_alarm/app/constants/constant_widget.dart';
 import '../../../constants/all_color.dart';
 import '../../../constants/text_style.dart';
 import '../../../widget/add_time_card.dart';
-import '../../../widget/home_card.dart';
 import '../controllers/add_medicine_controller.dart';
 
 class AddMedicineView extends GetView<AddMedicineController> {
@@ -115,7 +114,7 @@ class AddMedicineView extends GetView<AddMedicineController> {
                         controller.count.value = value;
                         print(controller.count.value);
                       },
-                      step: 10,
+                      step: 1,
                       spacing: 0,
                       direction: Axis.horizontal,
                       textStyle: TextStyle(fontSize: 16),
