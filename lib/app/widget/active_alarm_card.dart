@@ -30,8 +30,8 @@ class ActiveAlarmCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      surfaceTintColor: (inActive)
-          ? AllColors.pureBlack.withOpacity(0.01)
+      color: (inActive)
+          ? AllColors.lightRed
           : AllColors.greyWhite.withOpacity(1.0),
       elevation: 4,
       child: Padding(
@@ -45,14 +45,21 @@ class ActiveAlarmCard extends StatelessWidget {
               children: [
                 Text(
                   'Diphenhydramine',
-                  style: AllTextStyle().textRegularStyle16(fontSize: 20),
+                  style: AllTextStyle().textRegularStyle16(
+                      fontSize: 20,
+                      color: (inActive)
+                          ? AllColors.pureWhite
+                          : AllColors.pureBlack),
                 ),
                 Spacer(),
                 IconButton(
                     onPressed: () {},
-                    icon: const Icon(
-                      Icons.edit_outlined,
+                    icon: Icon(
+                      Icons.note_alt_outlined,
                       size: 18,
+                      color: (inActive)
+                          ? AllColors.pureWhite
+                          : AllColors.pureWhite,
                     ))
               ],
             ),
@@ -63,36 +70,55 @@ class ActiveAlarmCard extends StatelessWidget {
               children: [
                 Text(
                   'Day: ',
-                  style: AllTextStyle().textRegularStyle(fontSize: 20),
+                  style: AllTextStyle().textRegularStyle(
+                    fontSize: 20,
+                    color:
+                        (inActive) ? AllColors.pureWhite : AllColors.pureBlack,
+                  ),
                 ),
                 Wrap(
                     children: List.generate(
                         weekName.length,
                         (index) => WeeklyButton(
-                              dayName: weekName[index],
+                          dayName: weekName[index],
                               isSelecDay: isSelectDay,
                               index: index,
+                              inactiveText: (inActive) ? true : false,
                             ))),
               ],
             ),
             ConstantWidget().gapeH16(),
             Row(
               children: [
-                Text('Time: '),
+                Text('Time: ',
+                    style: AllTextStyle().textRegularStyle(
+                        color: (inActive)
+                            ? AllColors.pureWhite
+                            : AllColors.pureBlack)),
                 Text(
                   alermTime.join(",  "),
-                  style: AllTextStyle()
-                      .textRegularStyle(color: AllColors.primaryColor),
+                  style: AllTextStyle().textRegularStyle(
+                      color: (inActive)
+                          ? AllColors.pureWhite
+                          : AllColors.pureBlack),
                 ),
               ],
             ),
             ConstantWidget().gapeH16(),
             Row(
               children: [
-                Text("Duration: "),
+                Text(
+                  "Duration: ",
+                  style: AllTextStyle().textRegularStyle(
+                      color: (inActive)
+                          ? AllColors.pureWhite
+                          : AllColors.pureBlack),
+                ),
                 (inActive)
-                    ? Text("5-05-2023 to 7-05-2023")
-                    : Text("With After Before Mill"),
+                    ? Text("5-05-2023 to 7-05-2023",
+                        style: AllTextStyle()
+                            .textRegularStyle(color: AllColors.pureWhite))
+                    : const Text("With After Before Mill"),
               ],
             )
           ],

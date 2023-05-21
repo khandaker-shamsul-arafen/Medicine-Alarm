@@ -24,7 +24,7 @@ class _HomeCardState extends State<HomeCard> {
     return Padding(
       padding: EdgeInsets.only(right: 8.0.w),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.25,
+        // width: MediaQuery.of(context).size.width * 0.35,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6.r),
@@ -35,21 +35,20 @@ class _HomeCardState extends State<HomeCard> {
             padding: EdgeInsets.all(8.0.r),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // const Icon(Icons.alarm),
                 // ConstantWidget().gapeW8(),
                 Text(
                   widget.mediceneName,
-                  style: AllTextStyle()
-                      .textRegularStyle16(color: AllColors.primaryColor),
+                  style:
+                      AllTextStyle().textRegularStyle16(color: AllColors.grey),
                 ),
                 // const Spacer(),
                 Text(
                   widget.time + ' PM',
                   style: AllTextStyle().textRegularStyle16(
-                      color: AllColors.primaryColor,
-                      fontWeight: FontWeight.w400),
+                      color: AllColors.darkGrey, fontWeight: FontWeight.w400),
                 ),
               ],
             ),

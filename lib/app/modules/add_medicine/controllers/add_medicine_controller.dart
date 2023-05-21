@@ -11,11 +11,13 @@ class AddMedicineController extends GetxController {
   RxString pickedDate = ''.obs;
 
   RxList time = [].obs;
+  RxList dayTime = [].obs;
 
   final count = 0.0.obs;
 
   void onTimeChanged(Time newTime) {
     time1 = newTime;
+    print('Shanto ' + newTime.period.toString());
   }
 
   @override

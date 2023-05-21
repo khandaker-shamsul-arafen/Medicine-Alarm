@@ -56,54 +56,6 @@ class AddMedicineView extends GetView<AddMedicineController> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Container(
-                        //   width: MediaQuery.of(context).size.width * .4,
-                        //   height: 45.h,
-                        //   child: TextField(
-                        //     controller: controller.textController,
-                        //     decoration: InputDecoration(
-                        //       contentPadding: const EdgeInsets.only(left: 10),
-                        //
-                        //       hintMaxLines: 1,
-                        //       suffixIcon: InkWell(
-                        //         onTap: () async {
-                        //           controller.pickedDate.value =
-                        //               (await showDatePicker(
-                        //             context: context,
-                        //             initialDate: DateTime.now(),
-                        //             firstDate: DateTime.now(),
-                        //             lastDate: DateTime(2050),
-                        //           ))!;
-                        //           debugPrint(
-                        //               "PickDate i: ${controller.pickedDate.value}");
-                        //           //  if (controller.pickedDate != null &&
-                        //           //  controller.pickedDate.compareTo(DateTime.now()) >= -1) {
-                        //           //    //  widget.controller.text = pickedDate.toString();
-                        //           //  }
-                        //           controller.textController.text =
-                        //               controller.pickedDate.value as String;
-                        //         },
-                        //         child: const Icon(
-                        //           Icons.calendar_month_outlined,
-                        //           //  color: AppColors.borderColor,
-                        //         ),
-                        //       ),
-                        //       //fillColor: AllColors.pureWhite,
-                        //       // filled: true,
-                        //       labelText: "Start Date",
-                        //       labelStyle: AllTextStyle().textRegularStyle16(
-                        //           color: AllColors.pureBlack.withOpacity(0.6)),
-                        //       border: OutlineInputBorder(
-                        //           borderSide:
-                        //               const BorderSide(color: Colors.blueGrey),
-                        //           borderRadius: BorderRadius.circular(10)),
-                        //       focusedBorder: OutlineInputBorder(
-                        //           borderSide: const BorderSide(
-                        //               color: Colors.blueGrey, width: 2),
-                        //           borderRadius: BorderRadius.circular(10)),
-                        //     ),
-                        //     keyboardType: TextInputType.name,
-                        //   ),
                         Container(
                           width: MediaQuery.of(context).size.width * .4,
                           height: 45.h,
@@ -145,7 +97,6 @@ class AddMedicineView extends GetView<AddMedicineController> {
                             ],
                           ),
                         ),
-
                         Container(
                           width: MediaQuery.of(context).size.width * .3,
                           height: 45.h,
@@ -199,6 +150,7 @@ class AddMedicineView extends GetView<AddMedicineController> {
                                 child: Obx(() {
                                   return AddTimeCard(
                                     time: controller.time[index],
+                                    dayTime: controller.dayTime[index],
                                   );
                                 }),
                               )),
@@ -233,6 +185,10 @@ class AddMedicineView extends GetView<AddMedicineController> {
                                         (dateTime.hour.toInt() - 12).toString())
                                     : controller.time
                                         .add((dateTime.hour.toString()));
+                                (dateTime.hour.toInt() > 12)
+                                    ? controller.dayTime.add(('PM'))
+                                    : controller.dayTime.add('AM');
+                                //    controller.periods.add(dateTime.)
 
                                 debugPrint(
                                     "[debug datetime]:  ${controller.time[0]}");

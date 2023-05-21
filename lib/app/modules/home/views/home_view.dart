@@ -34,7 +34,7 @@ class HomeView extends GetView<HomeController> {
               ),
               ConstantWidget().gapeH16(),
               SizedBox(
-                height: 140.h,
+                height: 120.h,
                 width: Get.width,
                 child: Card(
                   shape: RoundedRectangleBorder(
@@ -46,24 +46,23 @@ class HomeView extends GetView<HomeController> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      ConstantWidget().gapeH(4),
+                      ConstantWidget().gapeH(9),
                       Text(
                         "01 min : 03 sec",
                         style: AllTextStyle().textRegularStyle(
-                            color: AllColors.primaryColor,
-                            fontWeight: FontWeight.bold),
+                            color: AllColors.grey, fontWeight: FontWeight.bold),
                       ),
-                      ConstantWidget().gapeH8(),
+                      ConstantWidget().gapeH(1),
                       Text(
-                        "01 : 03 PM",
-                        style: AllTextStyle()
-                            .textRegularStyle20(color: AllColors.primaryColor),
+                        "01:03 PM",
+                        style: AllTextStyle().textRegularStyle20(
+                            color: AllColors.primaryColor, fontSize: 28),
                       ),
-                      ConstantWidget().gapeH8(),
+                      ConstantWidget().gapeH(0),
                       Text(
                         "Napa 500",
                         style: AllTextStyle().textRegularStyle(
-                            color: AllColors.greyLight, fontSize: 18),
+                            color: AllColors.grey, fontSize: 18),
                       )
                     ],
                   ),
@@ -91,7 +90,7 @@ class HomeView extends GetView<HomeController> {
                           itemBuilder: (BuildContext context, int index) {
                             return const HomeCard(
                               time: '12:03',
-                              mediceneName: 'Napa',
+                              mediceneName: 'Napa 200mg Pantonix 200mg',
                             );
                           }),
                     ),
@@ -100,7 +99,27 @@ class HomeView extends GetView<HomeController> {
               ),
 
               ConstantWidget().gapeH(20),
-
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.08,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 10,
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (BuildContext context, int index) {
+                            return const HomeCard(
+                              time: '12:03',
+                              mediceneName: 'Pantonix 200mg',
+                            );
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+              ConstantWidget().gapeH(20),
               Center(
                 child: SizedBox(
                   height: 50.h,

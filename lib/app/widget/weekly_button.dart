@@ -8,12 +8,14 @@ class WeeklyButton extends StatefulWidget {
   final List isSelecDay;
   final int index;
   final String dayName;
+  final bool inactiveText;
 
   const WeeklyButton(
       {Key? key,
       required this.dayName,
       required this.index,
-      required this.isSelecDay})
+      required this.isSelecDay,
+      required this.inactiveText})
       : super(key: key);
 
   @override
@@ -46,7 +48,9 @@ class _WeeklyButtonState extends State<WeeklyButton> {
             height: 30.h,
             decoration: BoxDecoration(
                 color: (widget.isSelecDay[widget.index] == 1)
-                    ? AllColors.primaryColor
+                    ? (widget.inactiveText)
+                        ? Colors.green[500]
+                        : AllColors.primaryColor
                     : AllColors.grey,
                 shape: BoxShape.circle),
             child: Center(

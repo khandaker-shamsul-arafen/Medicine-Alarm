@@ -5,8 +5,10 @@ import 'package:medicine_alarm/app/constants/text_style.dart';
 
 class AddTimeCard extends StatelessWidget {
   final String time;
+  final String dayTime;
 
-  const AddTimeCard({Key? key, required this.time}) : super(key: key);
+  const AddTimeCard({Key? key, required this.time, required this.dayTime})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class AddTimeCard extends StatelessWidget {
       ),
       child: Center(
           child: Text(
-        '$time PM',
+            '$time $dayTime',
         style: AllTextStyle().textRegularStyle(color: AllColors.pureWhite),
       )),
     );
