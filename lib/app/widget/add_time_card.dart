@@ -21,7 +21,7 @@ class AddTimeCard extends StatelessWidget {
       ),
       child: Center(
           child: Text(
-            '$time $dayTime',
+        '$time $dayTime',
         style: AllTextStyle().textRegularStyle(color: AllColors.pureWhite),
       )),
     );

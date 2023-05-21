@@ -80,7 +80,7 @@ class ActiveAlarmCard extends StatelessWidget {
                     children: List.generate(
                         weekName.length,
                         (index) => WeeklyButton(
-                          dayName: weekName[index],
+                              dayName: weekName[index],
                               isSelecDay: isSelectDay,
                               index: index,
                               inactiveText: (inActive) ? true : false,
