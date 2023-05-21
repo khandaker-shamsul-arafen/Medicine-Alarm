@@ -23,7 +23,7 @@ class AddMedicineView extends GetView<AddMedicineController> {
         child: Padding(
           padding: EdgeInsets.only(top: 16.0.h, left: 16.0.w, right: 16.0.w),
           child: Obx(
-                () {
+            () {
               return SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
@@ -43,7 +43,7 @@ class AddMedicineView extends GetView<AddMedicineController> {
                             color: AllColors.pureBlack.withOpacity(0.6)),
                         border: OutlineInputBorder(
                             borderSide:
-                            const BorderSide(color: Colors.blueGrey),
+                                const BorderSide(color: Colors.blueGrey),
                             borderRadius: BorderRadius.circular(10)),
                         focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
@@ -129,8 +129,8 @@ class AddMedicineView extends GetView<AddMedicineController> {
                                   if (pickedDate != null) {
                                     print(pickedDate);
                                     String formattedDate =
-                                    DateFormat('yyyy-MM-dd')
-                                        .format(pickedDate);
+                                        DateFormat('yyyy-MM-dd')
+                                            .format(pickedDate);
                                     print(formattedDate);
                                     controller.pickedDate.value =
                                         formattedDate; //set output date to TextField value.
@@ -165,11 +165,11 @@ class AddMedicineView extends GetView<AddMedicineController> {
                             direction: Axis.horizontal,
                             textStyle: const TextStyle(fontSize: 16),
                             incrementIcon:
-                            const Icon(Icons.keyboard_arrow_up, size: 24),
+                                const Icon(Icons.keyboard_arrow_up, size: 24),
                             decrementIcon:
-                            const Icon(Icons.keyboard_arrow_down, size: 24),
+                                const Icon(Icons.keyboard_arrow_down, size: 24),
                             iconColor:
-                            MaterialStateProperty.resolveWith((states) {
+                                MaterialStateProperty.resolveWith((states) {
                               if (states.contains(MaterialState.disabled)) {
                                 return Colors.grey;
                               }
@@ -194,14 +194,14 @@ class AddMedicineView extends GetView<AddMedicineController> {
                     Wrap(
                       children: List.generate(
                           controller.time.value.length,
-                              (index) => Padding(
-                            padding: EdgeInsets.all(8.0.r),
-                            child: Obx(() {
-                              return AddTimeCard(
-                                time: controller.time[index],
-                              );
-                            }),
-                          )),
+                          (index) => Padding(
+                                padding: EdgeInsets.all(8.0.r),
+                                child: Obx(() {
+                                  return AddTimeCard(
+                                    time: controller.time[index],
+                                  );
+                                }),
+                              )),
                     ),
                     Center(
                       child: TextButton.icon(
@@ -256,7 +256,7 @@ class AddMedicineView extends GetView<AddMedicineController> {
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide:
-                                  const BorderSide(color: Colors.blueGrey),
+                                      const BorderSide(color: Colors.blueGrey),
                                   borderRadius: BorderRadius.circular(10)),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
@@ -304,34 +304,34 @@ class AddMedicineView extends GetView<AddMedicineController> {
         elevation: 5,
         isScrollControlled: true,
         builder: (_) => Container(
-          height: 400,
-          padding: EdgeInsets.only(
-            top: 15,
-            left: 15,
-            right: 15,
-            // this will prevent the soft keyboard from covering the text fields
-            bottom: MediaQuery.of(context).viewInsets.bottom + 120,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              TextField(
-                controller: controller.timeController,
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: const InputDecoration(hintText: 'Time'),
+              height: 400,
+              padding: EdgeInsets.only(
+                top: 15,
+                left: 15,
+                right: 15,
+                // this will prevent the soft keyboard from covering the text fields
+                bottom: MediaQuery.of(context).viewInsets.bottom + 120,
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  controller.time.add(controller.timeController.text);
-                  controller.timeController.text = '';
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Create New'),
-              )
-            ],
-          ),
-        ));
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    controller: controller.timeController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    decoration: const InputDecoration(hintText: 'Time'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      controller.time.add(controller.timeController.text);
+                      controller.timeController.text = '';
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Create New'),
+                  )
+                ],
+              ),
+            ));
   }
 }
