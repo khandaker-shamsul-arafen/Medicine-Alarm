@@ -9,6 +9,7 @@ abstract class Routes {
   static const ADD_MEDICINE = _Paths.ADD_MEDICINE;
   static const BOTTOM_NAVIGATION_BAR = _Paths.BOTTOM_NAVIGATION_BAR;
   static const PROFILE = _Paths.PROFILE;
+  static const INACTIVE_ALARM = _Paths.INACTIVE_ALARM;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const ADD_MEDICINE = '/add-medicine';
   static const BOTTOM_NAVIGATION_BAR = '/bottom-navigation-bar';
   static const PROFILE = '/profile';
+  static const INACTIVE_ALARM = '/inactive-alarm';
 }

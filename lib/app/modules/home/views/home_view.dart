@@ -5,6 +5,7 @@ import 'package:medicine_alarm/app/constants/all_color.dart';
 import 'package:medicine_alarm/app/constants/constant_widget.dart';
 import 'package:medicine_alarm/app/constants/text_style.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../../widget/home_card.dart';
 import '../controllers/home_controller.dart';
 
@@ -21,6 +22,7 @@ class HomeView extends GetView<HomeController> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              ConstantWidget().gapeH16(),
               Center(
                 child: Text(
                   'Next Medicine Taking time ',
@@ -31,62 +33,96 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               ConstantWidget().gapeH16(),
-              Container(
-                height: 110.h,
+              SizedBox(
+                height: 140.h,
                 width: Get.width,
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: AllColors.grey.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6.r),
+                  ),
+                  surfaceTintColor: AllColors.greyWhite.withOpacity(1.0),
+                  elevation: 2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ConstantWidget().gapeH(4),
+                      Text(
+                        "01 min : 03 sec",
+                        style: AllTextStyle().textRegularStyle(
+                            color: AllColors.primaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      ConstantWidget().gapeH8(),
+                      Text(
+                        "01 : 03 PM",
+                        style: AllTextStyle()
+                            .textRegularStyle20(color: AllColors.primaryColor),
+                      ),
+                      ConstantWidget().gapeH8(),
+                      Text(
+                        "Napa 500",
+                        style: AllTextStyle().textRegularStyle(
+                            color: AllColors.greyLight, fontSize: 18),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              ConstantWidget().gapeH16(),
+              Center(
+                child: Text(
+                  'Recent Medicine ',
+                  style: AllTextStyle().textRegularStyle16(
+                      color: AllColors.pureBlack.withOpacity(0.6)),
+                ),
+              ),
+              ConstantWidget().gapeH16(),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.08,
+                child: Row(
                   children: [
-                    Text(
-                      "01 : 03 PM",
-                      style: AllTextStyle()
-                          .textRegularStyle(color: AllColors.primaryColor),
+                    Expanded(
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 10,
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (BuildContext context, int index) {
+                            return const HomeCard(
+                              time: '12:03',
+                              mediceneName: 'Napa',
+                            );
+                          }),
                     ),
-                    Text(
-                      "01 : 03 PM",
-                      style: AllTextStyle()
-                          .textRegularStyle20(color: AllColors.primaryColor),
-                    ),
-                    Text(
-                      "Napa 500",
-                      style: AllTextStyle().textRegularStyle20(
-                          color: AllColors.primaryColor, fontSize: 26),
-                    )
                   ],
                 ),
               ),
-              ConstantWidget().gapeH(16),
-              Text(
-                'Recent Medicine Time ',
-                style: AllTextStyle().textRegularStyle16(
-                    color: AllColors.pureBlack.withOpacity(0.6)),
-              ),
-              ConstantWidget().gapeH8(),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.30,
-                child: ListView.builder(
-                    itemCount: 15,
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (BuildContext context, int index) {
-                      return const HomeCard(
-                        time: '12:03',
-                        mediceneName: 'Napa',
-                        color: AllColors.primaryColor,
-                      );
-                    }),
-              ),
-              ConstantWidget().gapeH(16),
-              Text(
-                'Recently Ended ',
-                style: AllTextStyle().textRegularStyle16(
-                    color: AllColors.pureBlack.withOpacity(0.6)),
-              ),
+
+              ConstantWidget().gapeH(20),
+
+              Center(
+                child: SizedBox(
+                  height: 50.h,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Get.toNamed(Routes.INACTIVE_ALARM);
+                    },
+                    icon: Image.asset('assets/Alarm.png'),
+                    label: Text(
+                      'Recently Ended Medicine Schedule',
+                      style: AllTextStyle()
+                          .textRegularStyle(color: AllColors.pureWhite),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AllColors.primaryColor.withOpacity(0.8),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0)),
+                    ),
+                  ),
+                ),
+              )
+
               // ConstantWidget().gapeH8(),
               // SizedBox(
               //   height: MediaQuery.of(context).size.height * 0.27,

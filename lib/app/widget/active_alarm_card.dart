@@ -7,11 +7,10 @@ import 'package:medicine_alarm/app/widget/weekly_button.dart';
 import '../constants/text_style.dart';
 
 class ActiveAlarmCard extends StatelessWidget {
-  final Color color;
   final List isSelectDay;
+  final bool inActive;
 
-  ActiveAlarmCard(
-      {Key? key, this.color = AllColors.pureWhite, required this.isSelectDay})
+  ActiveAlarmCard({Key? key, required this.isSelectDay, this.inActive = false})
       : super(key: key);
   List weekName = [
     'S',
@@ -26,16 +25,14 @@ class ActiveAlarmCard extends StatelessWidget {
     '9:00',
     '10:00',
     '11:00',
-    '12:00',
-    '1:00',
-    '4:00',
-    '4:00',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: color,
+      surfaceTintColor: (inActive)
+          ? AllColors.pureBlack.withOpacity(0.01)
+          : AllColors.greyWhite.withOpacity(1.0),
       elevation: 4,
       child: Padding(
         padding: EdgeInsets.all(16.0.r),
@@ -47,7 +44,7 @@ class ActiveAlarmCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'Napa',
+                  'Diphenhydramine',
                   style: AllTextStyle().textRegularStyle16(fontSize: 20),
                 ),
                 Spacer(),
@@ -71,14 +68,10 @@ class ActiveAlarmCard extends StatelessWidget {
                 Wrap(
                     children: List.generate(
                         weekName.length,
-                        (index) => Column(
-                              children: [
-                                WeeklyButton(
-                                  dayName: weekName[index],
-                                  isSelecDay: isSelectDay,
-                                  index: index,
-                                ),
-                              ],
+                        (index) => WeeklyButton(
+                              dayName: weekName[index],
+                              isSelecDay: isSelectDay,
+                              index: index,
                             ))),
               ],
             ),
@@ -94,7 +87,14 @@ class ActiveAlarmCard extends StatelessWidget {
               ],
             ),
             ConstantWidget().gapeH16(),
-            Text("With After Before Mill")
+            Row(
+              children: [
+                Text("Duration: "),
+                (inActive)
+                    ? Text("5-05-2023 to 7-05-2023")
+                    : Text("With After Before Mill"),
+              ],
+            )
           ],
         ),
       ),

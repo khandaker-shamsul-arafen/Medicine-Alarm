@@ -23,45 +23,40 @@ class WeeklyButton extends StatefulWidget {
 class _WeeklyButtonState extends State<WeeklyButton> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          if (widget.isSelecDay[widget.index] == 0) {
-            widget.isSelecDay[widget.index] = 1;
-          } else if (widget.isSelecDay[widget.index] == 1) {
-            widget.isSelecDay[widget.index] = 0;
-          } //running Controller Ar IsSelected  List a Add korte Hobe 0 k.
+    return Row(
+      children: [
+        InkWell(
+          onTap: () {
+            setState(() {
+              if (widget.isSelecDay[widget.index] == 0) {
+                widget.isSelecDay[widget.index] = 1;
+              } else if (widget.isSelecDay[widget.index] == 1) {
+                widget.isSelecDay[widget.index] = 0;
+              } //running Controller Ar IsSelected  List a Add korte Hobe 0 k.
 
-          // for (var index1 = 0; index1 <widget.isSelecDay.length; index1++) {
-          //   if (index1 != widget.index) {
-          //     widget.isSelecDay[index1] = 0;
-          //   }
-          // }
-        });
-      },
-      child: Padding(
-        padding: EdgeInsets.only(
-          right: 10.0.w,
+              // for (var index1 = 0; index1 <widget.isSelecDay.length; index1++) {
+              //   if (index1 != widget.index) {
+              //     widget.isSelecDay[index1] = 0;
+              //   }
+              // }
+            });
+          },
+          child: Container(
+            width: 30.w,
+            height: 30.h,
+            decoration: BoxDecoration(
+                color: (widget.isSelecDay[widget.index] == 1)
+                    ? AllColors.primaryColor
+                    : AllColors.grey,
+                shape: BoxShape.circle),
+            child: Center(
+                child: Text(widget.dayName,
+                    style: AllTextStyle().textRegularStyle(
+                        color: AllColors.pureWhite, fontSize: 12))),
+          ),
         ),
-        child: Column(
-          children: [
-            Container(
-              width: 30.w,
-              height: 30.h,
-              decoration: BoxDecoration(
-                  color: (widget.isSelecDay[widget.index] == 1)
-                      ? AllColors.primaryColor
-                      : AllColors.grey,
-                  shape: BoxShape.circle),
-              child: Center(
-                  child: Text(widget.dayName,
-                      style: AllTextStyle().textRegularStyle(
-                          color: AllColors.pureWhite, fontSize: 12))),
-            ),
-            ConstantWidget().gapeH16(),
-          ],
-        ),
-      ),
+        ConstantWidget().gapeW8(),
+      ],
     );
   }
 }

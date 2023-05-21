@@ -6,6 +6,8 @@ import '../modules/bottom_navigation_bar/bindings/bottom_navigation_bar_binding.
 import '../modules/bottom_navigation_bar/views/bottom_navigation_bar_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/inactive_alarm/bindings/inactive_alarm_binding.dart';
+import '../modules/inactive_alarm/views/inactive_alarm_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/running/bindings/running_binding.dart';
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.INACTIVE_ALARM,
+      page: () => const InactiveAlarmView(),
+      binding: InactiveAlarmBinding(),
     ),
   ];
 }
