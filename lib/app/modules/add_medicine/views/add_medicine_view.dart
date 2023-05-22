@@ -1,7 +1,6 @@
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:get/get.dart';
@@ -254,40 +253,40 @@ class AddMedicineView extends GetView<AddMedicineController> {
     );
   }
 
-  void showForm(context) async {
-    showModalBottomSheet(
-        context: context,
-        elevation: 5,
-        isScrollControlled: true,
-        builder: (_) => Container(
-              height: 400,
-              padding: EdgeInsets.only(
-                top: 15,
-                left: 15,
-                right: 15,
-                // this will prevent the soft keyboard from covering the text fields
-                bottom: MediaQuery.of(context).viewInsets.bottom + 120,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  TextField(
-                    controller: controller.timeController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    decoration: const InputDecoration(hintText: 'Time'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      controller.time.add(controller.timeController.text);
-                      controller.timeController.text = '';
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Create New'),
-                  )
-                ],
-              ),
-            ));
-  }
+// void showForm(context) async {
+//   showModalBottomSheet(
+//       context: context,
+//       elevation: 5,
+//       isScrollControlled: true,
+//       builder: (_) => Container(
+//             height: 400,
+//             padding: EdgeInsets.only(
+//               top: 15,
+//               left: 15,
+//               right: 15,
+//               // this will prevent the soft keyboard from covering the text fields
+//               bottom: MediaQuery.of(context).viewInsets.bottom + 120,
+//             ),
+//             child: Column(
+//               mainAxisSize: MainAxisSize.min,
+//               crossAxisAlignment: CrossAxisAlignment.end,
+//               children: [
+//                 TextField(
+//                   controller: controller.timeController,
+//                   keyboardType: TextInputType.number,
+//                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+//                   decoration: const InputDecoration(hintText: 'Time'),
+//                 ),
+//                 ElevatedButton(
+//                   onPressed: () async {
+//                     controller.time.add(controller.timeController.text);
+//                     controller.timeController.text = '';
+//                     Navigator.of(context).pop();
+//                   },
+//                   child: const Text('Create New'),
+//                 )
+//               ],
+//             ),
+//           ));
+// }
 }

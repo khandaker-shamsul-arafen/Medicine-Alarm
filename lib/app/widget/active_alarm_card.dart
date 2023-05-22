@@ -59,7 +59,16 @@ class ActiveAlarmCard extends StatelessWidget {
                       size: 18,
                       color: (inActive)
                           ? AllColors.pureWhite
-                          : AllColors.pureWhite,
+                          : AllColors.pureBlack,
+                    )),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.delete,
+                      size: 18,
+                      color: (inActive)
+                          ? AllColors.pureWhite
+                          : AllColors.pureBlack,
                     ))
               ],
             ),

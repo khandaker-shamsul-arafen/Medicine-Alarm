@@ -26,6 +26,8 @@ dependencies:
   flutter_spinbox: ^0.13.1
   intl: ^0.17.0
   day_night_time_picker: ^1.2.0+2
+  timer_builder: ^2.0.0
+  custom_timer: ^0.2.3
 
 dev_dependencies:
   flutter_test:

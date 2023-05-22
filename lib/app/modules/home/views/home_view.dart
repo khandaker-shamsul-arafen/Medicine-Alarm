@@ -1,3 +1,4 @@
+import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -34,7 +35,7 @@ class HomeView extends GetView<HomeController> {
               ),
               ConstantWidget().gapeH16(),
               SizedBox(
-                height: 120.h,
+                height: 130.h,
                 width: Get.width,
                 child: Card(
                   shape: RoundedRectangleBorder(
@@ -47,11 +48,17 @@ class HomeView extends GetView<HomeController> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ConstantWidget().gapeH(9),
-                      Text(
-                        "01 min : 03 sec",
-                        style: AllTextStyle().textRegularStyle(
-                            color: AllColors.grey, fontWeight: FontWeight.bold),
-                      ),
+                      CustomTimer(
+                          controller: controller.timerController,
+                          builder: (state, time) {
+                            // Build the widget you want!🎉
+                            return Text(
+                              "${time.hours}:${time.minutes}:${time.seconds}",
+                              style: AllTextStyle().textRegularStyle(
+                                  color: AllColors.grey,
+                                  fontWeight: FontWeight.bold),
+                            );
+                          }),
                       ConstantWidget().gapeH(1),
                       Text(
                         "01:03 PM",
@@ -74,27 +81,6 @@ class HomeView extends GetView<HomeController> {
                   'Recent Medicine ',
                   style: AllTextStyle().textRegularStyle16(
                       color: AllColors.pureBlack.withOpacity(0.6)),
-                ),
-              ),
-              ConstantWidget().gapeH16(),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.08,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 10,
-                          shrinkWrap: true,
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            return const HomeCard(
-                              time: '12:03',
-                              mediceneName: 'Napa 200mg Pantonix 200mg',
-                            );
-                          }),
-                    ),
-                  ],
                 ),
               ),
 
@@ -127,7 +113,7 @@ class HomeView extends GetView<HomeController> {
                     onPressed: () {
                       Get.toNamed(Routes.INACTIVE_ALARM);
                     },
-                    icon: Image.asset('assets/Alarm.png'),
+                    icon: Image.asset('assets/Alarmw.png'),
                     label: Text(
                       'Recently Ended Medicine Schedule',
                       style: AllTextStyle()
