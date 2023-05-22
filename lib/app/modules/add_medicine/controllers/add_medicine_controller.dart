@@ -10,7 +10,8 @@ class AddMedicineController extends GetxController {
   Time time1 = Time(hour: 11, minute: 30);
   RxString pickedDate = ''.obs;
 
-  RxList time = ['15', '16', '17'].obs;
+  RxList time = ['17', '20', '47'].obs;
+  RxList time2 = ['59', '12', '15'].obs;
   RxList dayTime = [].obs;
 
   final count = 0.0.obs;

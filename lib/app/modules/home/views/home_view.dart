@@ -48,17 +48,19 @@ class HomeView extends GetView<HomeController> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ConstantWidget().gapeH(9),
-                      CustomTimer(
-                          controller: controller.timerController,
-                          builder: (state, time) {
-                            // Build the widget you want!🎉
-                            return Text(
-                              "${time.hours}:${time.minutes}:${time.seconds}",
-                              style: AllTextStyle().textRegularStyle(
-                                  color: AllColors.grey,
-                                  fontWeight: FontWeight.bold),
-                            );
-                          }),
+                      Obx(() {
+                        return CustomTimer(
+                            controller: controller.timerController,
+                            builder: (state, time) {
+                              // Build the widget you want!🎉
+                              return Text(
+                                "${time.hours}:${time.minutes}:${time.seconds}",
+                                style: AllTextStyle().textRegularStyle(
+                                    color: AllColors.grey,
+                                    fontWeight: FontWeight.bold),
+                              );
+                            });
+                      }),
                       ConstantWidget().gapeH(1),
                       Text(
                         "01:03 PM",
