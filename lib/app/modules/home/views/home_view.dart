@@ -113,7 +113,7 @@ class HomeView extends GetView<HomeController> {
                     onPressed: () {
                       Get.toNamed(Routes.INACTIVE_ALARM);
                     },
-                    icon: Image.asset('assets/Alarmw.png'),
+                    icon: Image.asset('assets/Alarm.png'),
                     label: Text(
                       'Recently Ended Medicine Schedule',
                       style: AllTextStyle()

@@ -9,6 +9,16 @@ class AddMedicineController extends GetxController {
 
   Time time1 = Time(hour: 11, minute: 30);
   RxString pickedDate = ''.obs;
+  final isSelectWeekDay = [1, 1, 1, 1, 1, 1, 1].obs;
+  RxList weekName = [
+    'S',
+    'M',
+    'T',
+    'W',
+    'T',
+    'F',
+    'S',
+  ].obs;
 
   RxList time = ['17', '20', '47'].obs;
   RxList time2 = ['59', '12', '15'].obs;

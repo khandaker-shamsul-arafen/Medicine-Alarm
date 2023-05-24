@@ -49,7 +49,7 @@ class _WeeklyButtonState extends State<WeeklyButton> {
             decoration: BoxDecoration(
                 color: (widget.isSelecDay[widget.index] == 1)
                     ? (widget.inactiveText)
-                        ? Colors.green[500]
+                        ? AllColors.lightGreen
                         : AllColors.primaryColor
                     : AllColors.grey,
                 shape: BoxShape.circle),

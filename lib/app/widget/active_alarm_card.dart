@@ -52,24 +52,25 @@ class ActiveAlarmCard extends StatelessWidget {
                           : AllColors.pureBlack),
                 ),
                 Spacer(),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.note_alt_outlined,
-                      size: 18,
-                      color: (inActive)
-                          ? AllColors.pureWhite
-                          : AllColors.pureBlack,
-                    )),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.delete,
-                      size: 18,
-                      color: (inActive)
-                          ? AllColors.pureWhite
-                          : AllColors.pureBlack,
-                    ))
+                GestureDetector(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.note_alt_outlined,
+                    size: 18,
+                    color:
+                        (inActive) ? AllColors.pureWhite : AllColors.pureBlack,
+                  ),
+                ),
+                ConstantWidget().gapeW(4),
+                GestureDetector(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.delete,
+                    size: 18,
+                    color:
+                        (inActive) ? AllColors.pureWhite : AllColors.pureBlack,
+                  ),
+                )
               ],
             ),
             ConstantWidget().gapeH(10),

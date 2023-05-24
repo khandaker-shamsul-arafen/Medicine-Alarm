@@ -10,6 +10,7 @@ import 'package:medicine_alarm/app/constants/constant_widget.dart';
 import '../../../constants/all_color.dart';
 import '../../../constants/text_style.dart';
 import '../../../widget/add_time_card.dart';
+import '../../../widget/weekly_button.dart';
 import '../controllers/add_medicine_controller.dart';
 
 class AddMedicineView extends GetView<AddMedicineController> {
@@ -53,10 +54,31 @@ class AddMedicineView extends GetView<AddMedicineController> {
                     ),
                     ConstantWidget().gapeH16(),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Starting Date",
+                          style: AllTextStyle().textRegularStyle(
+                            fontSize: 20,
+                            color: AllColors.pureBlack,
+                          ),
+                        ),
+                        ConstantWidget().gapeW(130),
+                        Text(
+                          "Continue Date,",
+                          style: AllTextStyle().textRegularStyle(
+                            fontSize: 20,
+                            color: AllColors.pureBlack,
+                          ),
+                        )
+                      ],
+                    ),
+                    ConstantWidget().gapeH8(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width * .4,
+                          width: MediaQuery.of(context).size.width * .5,
                           height: 45.h,
                           decoration: BoxDecoration(
                               border: Border.all(),
@@ -139,7 +161,13 @@ class AddMedicineView extends GetView<AddMedicineController> {
                       ],
                     ),
                     ConstantWidget().gapeH8(),
-                    const Text('Time'),
+                    Text(
+                      'Time',
+                      style: AllTextStyle().textRegularStyle(
+                        fontSize: 20,
+                        color: AllColors.pureBlack,
+                      ),
+                    ),
                     ConstantWidget().gapeH8(),
                     Wrap(
                       children: List.generate(
@@ -153,6 +181,29 @@ class AddMedicineView extends GetView<AddMedicineController> {
                                   );
                                 }),
                               )),
+                    ),
+                    ConstantWidget().gapeH8(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Day: ',
+                          style: AllTextStyle().textRegularStyle(
+                            fontSize: 20,
+                            color: AllColors.pureBlack,
+                          ),
+                        ),
+                        Wrap(
+                            children: List.generate(
+                                controller.weekName.length,
+                                (index) => WeeklyButton(
+                                      dayName: controller.weekName[index],
+                                      isSelecDay: controller.isSelectWeekDay,
+                                      index: index,
+                                      inactiveText: false,
+                                    ))),
+                      ],
                     ),
                     Center(
                       child: TextButton.icon(
