@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../about/views/about_view.dart';
 import '../../add_medicine/views/add_medicine_view.dart';
 import '../../home/views/home_view.dart';
 import '../../profile/views/profile_view.dart';
@@ -31,7 +32,7 @@ class BottomNavigationBarController extends GetxController
     const HomeView(),
     const RunningView(),
     const ProfileView(),
-    const RunningView(),
+    const AboutView(),
     const AddMedicineView(),
   ];
 

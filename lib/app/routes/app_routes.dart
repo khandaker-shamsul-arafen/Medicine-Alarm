@@ -10,6 +10,7 @@ abstract class Routes {
   static const BOTTOM_NAVIGATION_BAR = _Paths.BOTTOM_NAVIGATION_BAR;
   static const PROFILE = _Paths.PROFILE;
   static const INACTIVE_ALARM = _Paths.INACTIVE_ALARM;
+  static const ABOUT = _Paths.ABOUT;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const BOTTOM_NAVIGATION_BAR = '/bottom-navigation-bar';
   static const PROFILE = '/profile';
   static const INACTIVE_ALARM = '/inactive-alarm';
+  static const ABOUT = '/about';
 }

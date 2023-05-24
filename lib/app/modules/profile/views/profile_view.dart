@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:medicine_alarm/app/constants/all_color.dart';
+import 'package:medicine_alarm/app/constants/constant_widget.dart';
+import 'package:medicine_alarm/app/constants/text_style.dart';
 
 import '../controllers/profile_controller.dart';
 
@@ -9,44 +14,115 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('ProfileView'),
+        title: const Text('Profile'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Column(
-          children: [
-            Text(
-              'ProfileView is working',
-              style: TextStyle(fontSize: 20),
-              //   CircleAvatar(
-              //     radius: 60.r,
-              //     child: ClipOval(
-              //         child: FancyShimmerImage(
-              //           imageUrl: controller
-              //               .data.profileData.value!.image ??
-              //               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
-              //           shimmerBaseColor: Colors.white,
-              //           shimmerHighlightColor: Colors.blue,
-              //           shimmerBackColor: Colors.grey,
-              //         )
-              //
-              //       // Image.network(controller
-              //       //         .data.profileData.value!.image ??
-              //       //     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png") //"assets/owner.jpg"
-              //
-              //       // CachedNetworkImage(
-              //       //   imageUrl:
-              //       //       "https://wallpapercave.com/dwp2x/wp2637016.jpg",
-              //       //   fit: BoxFit.cover,
-              //       //   width: 200.h,
-              //       //   height: 200.w,
-              //       // ),
-              //     ),
-              //   ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0.r),
+        child: Obx(() {
+          return SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              //mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                    radius: 100.r,
+                    backgroundImage: const NetworkImage(
+                        'https://www.pinclipart.com/picdir/big/218-2189254_free-online-avatars-kid-characters-family-vector-for.png'),
+                    onBackgroundImageError: (e, s) {
+                      debugPrint('image issue, $e,$s');
+                    }),
+                ConstantWidget().gapeH16(),
+                TextField(
+                  controller: controller.name,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.person),
+                    labelText: "Full Name",
+                    border: const OutlineInputBorder(),
+                    errorText: (controller.name.text.isEmpty)
+                        ? controller.validate.value
+                            ? 'Name Can\'t Be Empty'
+                            : null
+                        : null,
+                  ),
+                  keyboardType: TextInputType.name,
+                ),
+                ConstantWidget().gapeH16(),
+                TextField(
+                  controller: controller.phone,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  ],
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.phone),
+                    labelText: "Phone",
+                    border: const OutlineInputBorder(),
+                    errorText: (controller.phone.text.isEmpty)
+                        ? controller.validate.value
+                            ? 'Phone Number Can\'t Be Empty'
+                            : null
+                        : null,
+                  ),
+                  keyboardType: TextInputType.phone,
+                ),
+                ConstantWidget().gapeH16(),
+                TextField(
+                  controller: controller.email,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.email),
+                    labelText: "Email",
+                    border: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.amber)),
+                    // focusedBorder: OutlineInputBorder(
+                    //   borderSide:
+                    //       const BorderSide(color: Colors.blueGrey, width: 2),
+                    // ),
+                    errorText: (controller.email.text.isEmpty)
+                        ? controller.validate.value
+                            ? 'Age Can\'t Be Empty'
+                            : null
+                        : null,
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                ConstantWidget().gapeH16(),
+                TextField(
+                  controller: controller.address,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.location_on),
+                    labelText: "Address",
+                    border: const OutlineInputBorder(
+                        //  borderSide: BorderSide(color: Colors.deepPurpleAccent)
+                        ),
+                    errorText: (controller.email.text.isEmpty)
+                        ? controller.validate.value
+                            ? 'Age Can\'t Be Empty'
+                            : null
+                        : null,
+                  ),
+                  keyboardType: TextInputType.streetAddress,
+                ),
+                ConstantWidget().gapeH16(),
+                ElevatedButton(
+                  onPressed: () async {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AllColors.primaryColor.withOpacity(0.8),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)),
+                  ),
+                  child: Text(
+                    "Update",
+                    style: AllTextStyle()
+                        .textRegularStyle16(color: AllColors.pureWhite),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        }),
       ),
     );
   }

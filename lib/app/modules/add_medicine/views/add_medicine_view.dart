@@ -206,7 +206,7 @@ class AddMedicineView extends GetView<AddMedicineController> {
                     Wrap(
                       children: [
                         TextFormField(
-                          // maxLines: 2,
+                          maxLines: 3,
                           maxLength: 100,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -242,7 +242,7 @@ class AddMedicineView extends GetView<AddMedicineController> {
                               )),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               );

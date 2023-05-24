@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/about/bindings/about_binding.dart';
+import '../modules/about/views/about_view.dart';
 import '../modules/add_medicine/bindings/add_medicine_binding.dart';
 import '../modules/add_medicine/views/add_medicine_view.dart';
 import '../modules/bottom_navigation_bar/bindings/bottom_navigation_bar_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.INACTIVE_ALARM,
       page: () => const InactiveAlarmView(),
       binding: InactiveAlarmBinding(),
+    ),
+    GetPage(
+      name: _Paths.ABOUT,
+      page: () => const AboutView(),
+      binding: AboutBinding(),
     ),
   ];
 }

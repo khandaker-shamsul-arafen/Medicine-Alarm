@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(412, 915),
       minTextAdapt: true,
       splitScreenMode: true,
+      useInheritedMediaQuery: true,
       builder: (context, child) {
         return GetMaterialApp(
           initialRoute: AppPages.INITIAL,
@@ -33,5 +34,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
