@@ -38,30 +38,6 @@ class RunningView extends GetView<RunningController> {
                     );
                   }),
             ),
-
-            // Text(
-            //   'InActive Alarm',
-            //   style: AllTextStyle()
-            //       .textRegularStyle16(fontWeight: FontWeight.w600),
-            // ),
-            // ConstantWidget().gapeH16(),
-            // SizedBox(
-            //   height: MediaQuery.of(context).size.height * 0.24,
-            //   width: MediaQuery.of(context).size.width,
-            //   child: ListView.builder(
-            //       shrinkWrap: true,
-            //       itemCount: 10,
-            //       itemBuilder: (BuildContext context, int index) {
-            //         return Column(
-            //           children: [
-            //             ActiveAlarmCard(
-            //                 color: AllColors.grey,
-            //                 isSelectDay: controller.isSelectWeekDay),
-            //             ConstantWidget().gapeH8()
-            //           ],
-            //         );
-            //       }),
-            // ),
           ],
         ),
       )),

@@ -6,6 +6,7 @@ import 'package:medicine_alarm/app/constants/all_color.dart';
 import 'package:medicine_alarm/app/constants/constant_widget.dart';
 import 'package:medicine_alarm/app/constants/text_style.dart';
 
+import '../../../helper/sql_helper.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -76,10 +77,6 @@ class ProfileView extends GetView<ProfileController> {
                     labelText: "Email",
                     border: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.amber)),
-                    // focusedBorder: OutlineInputBorder(
-                    //   borderSide:
-                    //       const BorderSide(color: Colors.blueGrey, width: 2),
-                    // ),
                     errorText: (controller.email.text.isEmpty)
                         ? controller.validate.value
                             ? 'Age Can\'t Be Empty'
@@ -106,18 +103,114 @@ class ProfileView extends GetView<ProfileController> {
                   keyboardType: TextInputType.streetAddress,
                 ),
                 ConstantWidget().gapeH16(),
-                ElevatedButton(
-                  onPressed: () async {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AllColors.primaryColor.withOpacity(0.8),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                  ),
-                  child: Text(
-                    "Update",
-                    style: AllTextStyle()
-                        .textRegularStyle16(color: AllColors.pureWhite),
-                  ),
+                Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () async {
+                        // SqlHelper.db();
+                        SqlHelper.db();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            AllColors.primaryColor.withOpacity(0.8),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                      child: Text(
+                        "Create",
+                        style: AllTextStyle()
+                            .textRegularStyle16(color: AllColors.pureWhite),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        SqlHelper.createItem();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            AllColors.primaryColor.withOpacity(0.8),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                      child: Text(
+                        "Insert",
+                        style: AllTextStyle()
+                            .textRegularStyle16(color: AllColors.pureWhite),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        SqlHelper.updateItem(
+                            'Akbar', 'shanto@gmail.com', 'akbar.jpg');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            AllColors.primaryColor.withOpacity(0.8),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                      child: Text(
+                        "Update",
+                        style: AllTextStyle()
+                            .textRegularStyle16(color: AllColors.pureWhite),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () async {
+                        // SqlHelper.db();
+                        controller.getItems();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            AllColors.primaryColor.withOpacity(0.8),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                      child: Text(
+                        "GEt",
+                        style: AllTextStyle()
+                            .textRegularStyle16(color: AllColors.pureWhite),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        // SqlHelper.db();
+                        SqlHelper.deletedb();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            AllColors.primaryColor.withOpacity(0.8),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                      child: Text(
+                        "Delete",
+                        style: AllTextStyle()
+                            .textRegularStyle16(color: AllColors.pureWhite),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        // SqlHelper.db();
+                        SqlHelper.deletedb();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            AllColors.primaryColor.withOpacity(0.8),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                      child: Text(
+                        "Delete",
+                        style: AllTextStyle()
+                            .textRegularStyle16(color: AllColors.pureWhite),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

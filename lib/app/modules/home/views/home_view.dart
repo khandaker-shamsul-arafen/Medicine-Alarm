@@ -83,7 +83,6 @@ class HomeView extends GetView<HomeController> {
                       color: AllColors.pureBlack.withOpacity(0.6)),
                 ),
               ),
-
               ConstantWidget().gapeH(20),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
@@ -127,19 +126,6 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
               )
-
-              // ConstantWidget().gapeH8(),
-              // SizedBox(
-              //   height: MediaQuery.of(context).size.height * 0.27,
-              //   child: ListView.builder(
-              //       itemCount: 15,
-              //       shrinkWrap: true,
-              //       physics: const BouncingScrollPhysics(),
-              //       itemBuilder: (BuildContext context, int index) {
-              //         return const HomeCard(
-              //             time: '12:03', mediceneName: 'Histasin');
-              //       }),
-              // ),
             ],
           ),
         ),

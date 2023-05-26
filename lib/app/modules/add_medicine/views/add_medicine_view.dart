@@ -32,7 +32,7 @@ class AddMedicineView extends GetView<AddMedicineController> {
                     Center(
                       child: Text(
                         'Add Your Medicine Time',
-                        style: AllTextStyle().textRegularStyle16(fontSize: 20),
+                        style: AllTextStyle().textRegularStyle16(fontSize: 24),
                       ),
                     ),
                     ConstantWidget().gapeH(16),
@@ -55,134 +55,222 @@ class AddMedicineView extends GetView<AddMedicineController> {
                     ConstantWidget().gapeH16(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Starting Date",
+                              style: AllTextStyle().textRegularStyle(
+                                fontSize: 20,
+                                color: AllColors.pureBlack,
+                              ),
+                            ),
+                            ConstantWidget().gapeH8(),
+                            Container(
+                              width: MediaQuery.of(context).size.width * .5,
+                              height: 55.h,
+                              decoration: BoxDecoration(
+                                  border: Border.all(),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 8.0.w),
+                                    child: Text(controller.pickedDate.value,
+                                        style: AllTextStyle()
+                                            .textRegularStyle16()),
+                                  ),
+                                  const Spacer(),
+                                  IconButton(
+                                    onPressed: () async {
+                                      DateTime pickedDate =
+                                          (await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime.now(),
+                                        lastDate: DateTime(2050),
+                                      ))!;
+                                      if (pickedDate != null) {
+                                        print(pickedDate);
+                                        String formattedDate =
+                                            DateFormat('yyyy-MM-dd')
+                                                .format(pickedDate);
+                                        print(formattedDate);
+                                        controller.pickedDate.value =
+                                            formattedDate; //set output date to TextField value.
+                                      } else {
+                                        print("Date is not selected");
+                                      }
+                                    },
+                                    icon: const Icon(
+                                      Icons.calendar_month_outlined,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        ConstantWidget().gapeW16(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Continue Date",
+                              style: AllTextStyle().textRegularStyle(
+                                fontSize: 20,
+                                color: AllColors.pureBlack,
+                              ),
+                            ),
+                            ConstantWidget().gapeH8(),
+                            Container(
+                              width: MediaQuery.of(context).size.width * .35,
+                              height: 55.h,
+                              decoration: BoxDecoration(
+                                  border: Border.all(),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: SpinBox(
+                                min: 0,
+                                max: 500,
+                                value: controller.count.value,
+                                onChanged: (value) {
+                                  controller.count.value = value;
+                                  print(controller.count.value);
+                                },
+                                step: 1,
+                                spacing: 6,
+                                textStyle: const TextStyle(fontSize: 18),
+                                incrementIcon: const Icon(
+                                    Icons.keyboard_arrow_up,
+                                    size: 24),
+                                decrementIcon: const Icon(
+                                    Icons.keyboard_arrow_down,
+                                    size: 24),
+                                iconColor:
+                                    MaterialStateProperty.resolveWith((states) {
+                                  if (states.contains(MaterialState.disabled)) {
+                                    return Colors.grey;
+                                  }
+                                  if (states.contains(MaterialState.error)) {
+                                    return Colors.red;
+                                  }
+                                  if (states.contains(MaterialState.focused)) {
+                                    return Colors.blue;
+                                  }
+                                  return Colors.black;
+                                }),
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    ConstantWidget().gapeH(20),
+                    Row(
                       children: [
                         Text(
-                          "Starting Date",
+                          'Time: ',
                           style: AllTextStyle().textRegularStyle(
                             fontSize: 20,
                             color: AllColors.pureBlack,
                           ),
                         ),
-                        ConstantWidget().gapeW(130),
-                        Text(
-                          "Continue Date,",
-                          style: AllTextStyle().textRegularStyle(
-                            fontSize: 20,
-                            color: AllColors.pureBlack,
-                          ),
-                        )
-                      ],
-                    ),
-                    ConstantWidget().gapeH8(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * .5,
-                          height: 45.h,
-                          decoration: BoxDecoration(
-                              border: Border.all(),
-                              borderRadius: BorderRadius.circular(10)),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          width: MediaQuery.of(context).size.width * 0.75,
                           child: Row(
                             children: [
-                              Padding(
-                                padding: EdgeInsets.only(left: 8.0.w),
-                                child: Text(controller.pickedDate.value,
-                                    style: AllTextStyle().textRegularStyle16()),
-                              ),
-                              const Spacer(),
-                              IconButton(
-                                onPressed: () async {
-                                  DateTime pickedDate = (await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime.now(),
-                                    lastDate: DateTime(2050),
-                                  ))!;
-                                  if (pickedDate != null) {
-                                    print(pickedDate);
-                                    String formattedDate =
-                                        DateFormat('yyyy-MM-dd')
-                                            .format(pickedDate);
-                                    print(formattedDate);
-                                    controller.pickedDate.value =
-                                        formattedDate; //set output date to TextField value.
-                                  } else {
-                                    print("Date is not selected");
-                                  }
-                                },
-                                icon: const Icon(
-                                  Icons.calendar_month_outlined,
+                              Expanded(
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: controller.time.value.length,
+                                  shrinkWrap: true,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Padding(
+                                      padding: EdgeInsets.all(4.0.r),
+                                      child: Obx(() {
+                                        return AddTimeCard(
+                                          time: controller.time[index],
+                                          dayTime: controller.dayTime[index],
+                                        );
+                                      }),
+                                    );
+                                  },
                                 ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    ConstantWidget().gapeH16(),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          showPicker(
+                            dialogInsetPadding: EdgeInsets.symmetric(
+                                horizontal: 24.0.w, vertical: 24.0.h),
+                            width: Get.width * 0.9,
+                            showSecondSelector: true,
+                            context: context,
+                            value: controller.time1,
+                            onChange: controller.onTimeChanged,
+                            minuteInterval: TimePickerInterval.FIVE,
+                            // Optional onChange to receive value as DateTime
+                            onChangeDateTime: (DateTime dateTime) {
+                              // print(dateTime);
+                              (dateTime.hour.toInt() > 12)
+                                  ? controller.time.add(
+                                      (dateTime.hour.toInt() - 12).toString())
+                                  : controller.time
+                                      .add((dateTime.hour.toString()));
+                              (dateTime.hour.toInt() > 12)
+                                  ? controller.dayTime.add(('PM'))
+                                  : controller.dayTime.add('AM');
+                              //    controller.periods.add(dateTime.)
+
+                              debugPrint(
+                                  "[debug datetime]:  ${controller.time[0]}");
+                            },
+                          ),
+                        );
+                      },
+                      child: Center(
+                        child: Container(
+                          height: 30.h,
+                          width: 75.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6.0),
+                            border: Border.all(
+                                color: AllColors.primaryColor, width: 2.w),
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.add,
+                                size: 24.0,
+                                color: AllColors.primaryColor,
+                              ),
+                              Text(
+                                'ADD',
+                                style: AllTextStyle().textRegularStyle16(
+                                    color: AllColors.primaryColor),
                               )
                             ],
                           ),
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * .3,
-                          height: 45.h,
-                          decoration: BoxDecoration(
-                              border: Border.all(),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: SpinBox(
-                            min: 0,
-                            max: 500,
-                            value: controller.count.value,
-                            onChanged: (value) {
-                              controller.count.value = value;
-                              print(controller.count.value);
-                            },
-                            step: 1,
-                            spacing: 0,
-                            direction: Axis.horizontal,
-                            textStyle: const TextStyle(fontSize: 16),
-                            incrementIcon:
-                                const Icon(Icons.keyboard_arrow_up, size: 24),
-                            decrementIcon:
-                                const Icon(Icons.keyboard_arrow_down, size: 24),
-                            iconColor:
-                                MaterialStateProperty.resolveWith((states) {
-                              if (states.contains(MaterialState.disabled)) {
-                                return Colors.grey;
-                              }
-                              if (states.contains(MaterialState.error)) {
-                                return Colors.red;
-                              }
-                              if (states.contains(MaterialState.focused)) {
-                                return Colors.blue;
-                              }
-                              return Colors.black;
-                            }),
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    ConstantWidget().gapeH8(),
-                    Text(
-                      'Time',
-                      style: AllTextStyle().textRegularStyle(
-                        fontSize: 20,
-                        color: AllColors.pureBlack,
                       ),
                     ),
-                    ConstantWidget().gapeH8(),
-                    Wrap(
-                      children: List.generate(
-                          controller.time.value.length,
-                          (index) => Padding(
-                                padding: EdgeInsets.all(8.0.r),
-                                child: Obx(() {
-                                  return AddTimeCard(
-                                    time: controller.time[index],
-                                    dayTime: controller.dayTime[index],
-                                  );
-                                }),
-                              )),
-                    ),
-                    ConstantWidget().gapeH8(),
+                    ConstantWidget().gapeH(20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,6 +282,7 @@ class AddMedicineView extends GetView<AddMedicineController> {
                             color: AllColors.pureBlack,
                           ),
                         ),
+                        ConstantWidget().gapeW8(),
                         Wrap(
                             children: List.generate(
                                 controller.weekName.length,
@@ -204,54 +293,6 @@ class AddMedicineView extends GetView<AddMedicineController> {
                                       inactiveText: false,
                                     ))),
                       ],
-                    ),
-                    Center(
-                      child: TextButton.icon(
-                        // <-- TextButton
-                        onPressed: () {
-                          //  showForm(context);
-                          ///Need for Save Time Details in DataBase
-                          // Text(
-                          //   "${_time.hour}:${_time.minute}:${_time.second} ${_time.period.name}"
-                          //       .toUpperCase(),
-                          //   textAlign: TextAlign.center,
-                          //   style: Theme.of(context).textTheme.displayLarge,
-                          // ),
-                          Navigator.of(context).push(
-                            showPicker(
-                              dialogInsetPadding: EdgeInsets.symmetric(
-                                  horizontal: 24.0.w, vertical: 24.0.h),
-                              width: Get.width * 0.9,
-                              showSecondSelector: true,
-                              context: context,
-                              value: controller.time1,
-                              onChange: controller.onTimeChanged,
-                              minuteInterval: TimePickerInterval.FIVE,
-                              // Optional onChange to receive value as DateTime
-                              onChangeDateTime: (DateTime dateTime) {
-                                // print(dateTime);
-                                (dateTime.hour.toInt() > 12)
-                                    ? controller.time.add(
-                                        (dateTime.hour.toInt() - 12).toString())
-                                    : controller.time
-                                        .add((dateTime.hour.toString()));
-                                (dateTime.hour.toInt() > 12)
-                                    ? controller.dayTime.add(('PM'))
-                                    : controller.dayTime.add('AM');
-                                //    controller.periods.add(dateTime.)
-
-                                debugPrint(
-                                    "[debug datetime]:  ${controller.time[0]}");
-                              },
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.add,
-                          size: 24.0,
-                        ),
-                        label: const Text('ADD'),
-                      ),
                     ),
                     ConstantWidget().gapeH(16.h),
                     Wrap(
@@ -269,28 +310,25 @@ class AddMedicineView extends GetView<AddMedicineController> {
                                       color: Colors.blueGrey, width: 2),
                                   borderRadius: BorderRadius.circular(10)),
                               hintText: "Add Your Note ",
-                              hintStyle: AllTextStyle().textRegularStyle()),
+                              hintStyle: AllTextStyle()
+                                  .textRegularStyle(fontSize: 16)),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 20.0.h),
-                          child: SizedBox(
-                              width: Get.width,
-                              height: 60.h,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      AllColors.primaryColor.withOpacity(0.8),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                ),
-                                child: Text(
-                                  "Save",
-                                  style: AllTextStyle().textRegularStyle16(
-                                      color: AllColors.pureWhite),
-                                ),
-                              )),
+                        ConstantWidget().gapeH16(),
+                        Center(
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  AllColors.primaryColor.withOpacity(0.8),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                            ),
+                            child: Text(
+                              "Save",
+                              style: AllTextStyle().textRegularStyle16(
+                                  color: AllColors.pureWhite),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -303,41 +341,4 @@ class AddMedicineView extends GetView<AddMedicineController> {
       ),
     );
   }
-
-// void showForm(context) async {
-//   showModalBottomSheet(
-//       context: context,
-//       elevation: 5,
-//       isScrollControlled: true,
-//       builder: (_) => Container(
-//             height: 400,
-//             padding: EdgeInsets.only(
-//               top: 15,
-//               left: 15,
-//               right: 15,
-//               // this will prevent the soft keyboard from covering the text fields
-//               bottom: MediaQuery.of(context).viewInsets.bottom + 120,
-//             ),
-//             child: Column(
-//               mainAxisSize: MainAxisSize.min,
-//               crossAxisAlignment: CrossAxisAlignment.end,
-//               children: [
-//                 TextField(
-//                   controller: controller.timeController,
-//                   keyboardType: TextInputType.number,
-//                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-//                   decoration: const InputDecoration(hintText: 'Time'),
-//                 ),
-//                 ElevatedButton(
-//                   onPressed: () async {
-//                     controller.time.add(controller.timeController.text);
-//                     controller.timeController.text = '';
-//                     Navigator.of(context).pop();
-//                   },
-//                   child: const Text('Create New'),
-//                 )
-//               ],
-//             ),
-//           ));
-// }
 }

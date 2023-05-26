@@ -8,17 +8,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final addMedicineController = Get.find<AddMedicineController>();
   RxInt index = 0.obs;
 
-  // late CustomTimerController timerController = CustomTimerController(
-  //     vsync: this,
-  //     begin: Duration(
-  //         hours: (addMedicineController.time.length == 0)
-  //             ? 0
-  //             : int.parse(addMedicineController.time[0]) - DateTime.now().hour,
-  //         minutes: 12),
-  //     end: Duration(),
-  //     initialState: CustomTimerState.reset,
-  //     interval: CustomTimerInterval.milliseconds);
-
   late CustomTimerController timerController = CustomTimerController(
       vsync: this,
       begin: Duration(
@@ -45,15 +34,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   @override
   void onInit() {
     super.onInit();
-    //  timerController.start();
-    //    timer.addListener(() {
-    //      print('hello');
-    //      print(timer.state.value);
-    // //     index.value++;
-    //      timer.start();
-    //
-    //      print(timer.remaining.value.seconds.toString());
-    //    });
+
     timerController.start();
     timerController.state.addListener(() {
       index.value++;

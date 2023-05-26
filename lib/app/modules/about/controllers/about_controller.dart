@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../../../widget_model/listItem.dart';
+import '../../../widget_model/listItem.dart';
 
 class AboutController extends GetxController {
   //TODO: Implement AboutController

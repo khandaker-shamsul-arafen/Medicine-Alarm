@@ -20,9 +20,9 @@ class AddMedicineController extends GetxController {
     'S',
   ].obs;
 
-  RxList time = ['17', '20', '47'].obs;
+  RxList time = ['1', '2', '4'].obs;
   RxList time2 = ['59', '12', '15'].obs;
-  RxList dayTime = ['17', '20', '47'].obs;
+  RxList dayTime = [':18', ':28', ':48'].obs;
 
   final count = 0.0.obs;
 
