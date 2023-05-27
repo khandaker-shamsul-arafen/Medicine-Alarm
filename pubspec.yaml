@@ -29,6 +29,8 @@ dependencies:
   timer_builder: ^2.0.0
   custom_timer: ^0.2.3
   path: ^1.8.3
+  image_picker: ^0.8.7+5
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:

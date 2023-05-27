@@ -7,34 +7,22 @@ class SqlHelper {
 
   static Future<void> createTables(Database database) async {
     await database.execute(
-        'CREATE TABLE  tbl_profile( id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,full_name TEXT,email TEXT,image Text)');
+        'CREATE TABLE IF NOT EXISTS tbl_profile( id INTEGER PRIMARY KEY NOT NULL,full_name TEXT,phone TEXT,email TEXT,address Text,image Text)');
     print("createTables call");
-    //createItem();
+    await createItem(database);
   }
 
-  static Future db() async {
-    print(" call");
-    // Database database = openDatabase(
-    //   path,
-    //   version: 1,
-    //   onCreate: (Database database, int version) async {
-    //     print("db call");
-    //     await createTables(database);
-    //   },
-    // );
+  static databaseCreate() async {
+    var databasesPath = await getDatabasesPath();
+    path = await join(databasesPath, 'studentdb.db');
+    print("Db1 call$path");
+
     final database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       // When creating the db, create the table
       print("db call");
-      await createTables(db);
     });
     return database;
-  }
-
-  static db1() async {
-    var databasesPath = await getDatabasesPath();
-    path = join(databasesPath, 'studentdb.db');
-    print("Db1 call$path");
   }
 
   static deletedb() async {
@@ -42,15 +30,13 @@ class SqlHelper {
     await deleteDatabase(path);
   }
 
-  static createItem() async {
+  static createItem(Database database) async {
     print("createItem call");
 
-    final db = await SqlHelper.db();
-
-    await db.transaction(
+    await database.transaction(
       (txn) async {
         int id = await txn.rawInsert(
-            'INSERT INTO tbl_profile(full_name, email, image) VALUES("some name", "shanto@gmail.com", "shanto.jpg")');
+            'INSERT INTO tbl_profile(id, full_name, phone, email, address, image) VALUES("1", "", "", "shanto@gmail.com", "", "")');
         print('inserted1: $id');
       },
     );
@@ -58,20 +44,21 @@ class SqlHelper {
   }
 
   static updateItem(
+    Database database,
     String full_name,
-    String? email,
+    String phone,
+    String email,
+    String address,
     String image,
   ) async {
-    final db = await SqlHelper.db();
-
-    final count = await db.rawUpdate(
-        'UPDATE tbl_profile SET full_name = "Hi", email = ?,image = ? WHERE full_name = "some name"',
-        ['akbar217@gmail.com', 'akbar.jpg']);
+    final count = await database.rawUpdate(
+        'UPDATE tbl_profile SET full_name = ?, phone= ?, email = ?, address= ?, image = ? WHERE id = "1"',
+        [full_name, phone, email, address, image]);
     print('updated: $count');
   }
 
   static Future<void> deleteItem(int id) async {
-    final db = await SqlHelper.db();
+    final db = await SqlHelper.databaseCreate();
     try {
       await db.delete("tbl_students", where: "id = ?", whereArgs: [id]);
     } catch (err) {
@@ -79,14 +66,8 @@ class SqlHelper {
     }
   }
 
-  static Future<List<Map<String, dynamic>>> getItems() async {
-    final db = await SqlHelper.db();
-    return db.query('tbl_students', orderBy: "id");
-  }
-
-  static Future<List<Map<String, dynamic>>> getItems1() async {
+  static Future<List<Map<String, dynamic>>> getProfileInfo(Database db) async {
     print("Before Get DAta");
-    final db = await SqlHelper.db();
     // return db.query('tbl_students', orderBy: "id");
     print("Get DAta");
     print(db.rawQuery('SELECT * FROM tbl_profile').toString());

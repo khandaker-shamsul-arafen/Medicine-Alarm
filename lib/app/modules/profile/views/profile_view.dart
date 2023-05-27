@@ -22,20 +22,28 @@ class ProfileView extends GetView<ProfileController> {
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0.r),
-        child: Obx(() {
-          return SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Obx(() {
+            return Column(
               //mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CircleAvatar(
+                GestureDetector(
+                  onTap: () {
+                    controller.pickImageFromGallery();
+                  },
+                  // child: CircleAvatar(
+                  //     radius: 100.r,
+                  //     backgroundImage: controller.loadImage();
+                  //     onBackgroundImageError: (e, s) {
+                  //       debugPrint('image issue, $e,$s');
+                  //     }),
+                  child: CircleAvatar(
                     radius: 100.r,
-                    backgroundImage: const NetworkImage(
-                        'https://www.pinclipart.com/picdir/big/218-2189254_free-online-avatars-kid-characters-family-vector-for.png'),
-                    onBackgroundImageError: (e, s) {
-                      debugPrint('image issue, $e,$s');
-                    }),
+                    backgroundImage: MemoryImage(controller.loadImage()),
+                  ),
+                ),
                 ConstantWidget().gapeH16(),
                 TextField(
                   controller: controller.name,
@@ -44,7 +52,7 @@ class ProfileView extends GetView<ProfileController> {
                     labelText: "Full Name",
                     border: const OutlineInputBorder(),
                     errorText: (controller.name.text.isEmpty)
-                        ? controller.validate.value
+                        ? controller.nameValidate.value
                             ? 'Name Can\'t Be Empty'
                             : null
                         : null,
@@ -62,7 +70,7 @@ class ProfileView extends GetView<ProfileController> {
                     labelText: "Phone",
                     border: const OutlineInputBorder(),
                     errorText: (controller.phone.text.isEmpty)
-                        ? controller.validate.value
+                        ? controller.nameValidate.value
                             ? 'Phone Number Can\'t Be Empty'
                             : null
                         : null,
@@ -78,7 +86,7 @@ class ProfileView extends GetView<ProfileController> {
                     border: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.amber)),
                     errorText: (controller.email.text.isEmpty)
-                        ? controller.validate.value
+                        ? controller.nameValidate.value
                             ? 'Age Can\'t Be Empty'
                             : null
                         : null,
@@ -95,7 +103,7 @@ class ProfileView extends GetView<ProfileController> {
                         //  borderSide: BorderSide(color: Colors.deepPurpleAccent)
                         ),
                     errorText: (controller.email.text.isEmpty)
-                        ? controller.validate.value
+                        ? controller.nameValidate.value
                             ? 'Age Can\'t Be Empty'
                             : null
                         : null,
@@ -108,7 +116,7 @@ class ProfileView extends GetView<ProfileController> {
                     ElevatedButton(
                       onPressed: () async {
                         // SqlHelper.db();
-                        SqlHelper.db();
+                        SqlHelper.databaseCreate();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
@@ -124,7 +132,7 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        SqlHelper.createItem();
+                        // SqlHelper.createItem();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
@@ -141,7 +149,13 @@ class ProfileView extends GetView<ProfileController> {
                     ElevatedButton(
                       onPressed: () async {
                         SqlHelper.updateItem(
-                            'Akbar', 'shanto@gmail.com', 'akbar.jpg');
+                            controller.database,
+                            controller.name.text,
+                            controller.phone.text,
+                            controller.email.text,
+                            controller.address.text,
+                            controller.profilePhotoBase64.value);
+                        // controller.loadImage();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
@@ -162,7 +176,7 @@ class ProfileView extends GetView<ProfileController> {
                     ElevatedButton(
                       onPressed: () async {
                         // SqlHelper.db();
-                        controller.getItems();
+                        //   controller.getItems();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
@@ -213,9 +227,9 @@ class ProfileView extends GetView<ProfileController> {
                   ],
                 ),
               ],
-            ),
-          );
-        }),
+            );
+          }),
+        ),
       ),
     );
   }
