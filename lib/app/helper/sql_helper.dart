@@ -12,15 +12,15 @@ class SqlHelper {
 
   static databaseCreate() async {
     var databasesPath = await getDatabasesPath();
-    path = await join(databasesPath, 'studentdb.db');
+    path = await join(databasesPath, 'medicine_reminder.db');
     final database = await openDatabase(path,
         version: 1, onCreate: (Database db, int version) async {});
     return database;
   }
 
-  static deletedb() async {
-    await deleteDatabase(path);
-  }
+  // static deletedb() async {
+  //   await deleteDatabase(path);
+  // }
 
   static createItem(Database database) async {
     await database.transaction(

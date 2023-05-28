@@ -14,8 +14,10 @@ class ProfileController extends GetxController {
   final TextEditingController phone = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController address = TextEditingController();
-  RxBool nameValidate = false.obs;
-  RxList allData = [].obs;
+  final emailKey = GlobalKey<FormState>();
+  RxBool nameValidate = true.obs;
+  RxBool emailValidate = true.obs;
+  RxList profileData = [].obs;
   RxString profilePhotoBase64 = ''.obs;
 
   late Database database;
@@ -43,12 +45,12 @@ class ProfileController extends GetxController {
 
   refreshItems() async {
     final data = await SqlHelper.getProfileInfo(database);
-    allData.value = data;
-    name.text = allData[0]['full_name'];
-    email.text = allData[0]['email'];
-    phone.text = allData[0]['phone'];
-    address.text = allData[0]['address'];
-    profilePhotoBase64.value = allData[0]['image'];
+    profileData.value = data;
+    name.text = profileData[0]['full_name'];
+    email.text = profileData[0]['email'];
+    phone.text = profileData[0]['phone'];
+    address.text = profileData[0]['address'];
+    profilePhotoBase64.value = profileData[0]['image'];
   }
 
   @override

@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:medicine_alarm/app/constants/all_color.dart';
 import 'package:medicine_alarm/app/constants/constant_widget.dart';
 import 'package:medicine_alarm/app/constants/text_style.dart';
+import 'package:regexed_validator/regexed_validator.dart';
+import 'package:validatorless/validatorless.dart';
 
 import '../../../helper/sql_helper.dart';
 import '../controllers/profile_controller.dart';
@@ -40,79 +42,80 @@ class ProfileView extends GetView<ProfileController> {
                 ConstantWidget().gapeH16(),
                 TextField(
                   controller: controller.name,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.person),
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.person),
                     labelText: "Full Name",
-                    border: const OutlineInputBorder(),
-                    errorText: (controller.name.text.isEmpty)
-                        ? controller.nameValidate.value
-                            ? 'Name Can\'t Be Empty'
-                            : null
-                        : null,
+                    // border: const OutlineInputBorder(),
+                    // errorText: (controller.name.text.isEmpty)
+                    //     ? controller.nameValidate.value
+                    //         ? 'Name Can\'t Be Empty'
+                    //         : null
+                    //     : null,
                   ),
                   keyboardType: TextInputType.name,
                 ),
                 ConstantWidget().gapeH16(),
-                TextField(
+                TextFormField(
                   controller: controller.phone,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: Validatorless.multiple([
+                    Validatorless.min(11, 'phone must be  11 characters'),
+                    Validatorless.max(11, 'phone must be  11 characters'),
+                  ]),
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                   ],
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.phone),
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.phone),
                     labelText: "Phone",
-                    border: const OutlineInputBorder(),
-                    errorText: (controller.phone.text.isEmpty)
-                        ? controller.nameValidate.value
-                            ? 'Phone Number Can\'t Be Empty'
-                            : null
-                        : null,
                   ),
                   keyboardType: TextInputType.phone,
                 ),
                 ConstantWidget().gapeH16(),
-                TextField(
-                  controller: controller.email,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.email),
-                    labelText: "Email",
-                    border: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.amber)),
-                    errorText: (controller.email.text.isEmpty)
-                        ? controller.nameValidate.value
-                            ? 'Age Can\'t Be Empty'
-                            : null
-                        : null,
+                Form(
+                  key: controller.emailKey,
+                  child: TextFormField(
+                    controller: controller.email,
+                    autocorrect: true,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == null || !validator.email(value)) {
+                        return 'Please enter a valid email';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.email),
+                      labelText: "Email",
+                    ),
+                    keyboardType: TextInputType.emailAddress,
                   ),
-                  keyboardType: TextInputType.emailAddress,
                 ),
                 ConstantWidget().gapeH16(),
                 TextField(
                   controller: controller.address,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.location_on),
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.location_on),
                     labelText: "Address",
-                    border: const OutlineInputBorder(
+                    border: OutlineInputBorder(
                         //  borderSide: BorderSide(color: Colors.deepPurpleAccent)
                         ),
-                    errorText: (controller.email.text.isEmpty)
-                        ? controller.nameValidate.value
-                            ? 'Age Can\'t Be Empty'
-                            : null
-                        : null,
                   ),
                   keyboardType: TextInputType.streetAddress,
                 ),
                 ConstantWidget().gapeH16(),
                 ElevatedButton(
                   onPressed: () async {
-                    SqlHelper.updateItem(
-                        controller.database,
-                        controller.name.text,
-                        controller.phone.text,
-                        controller.email.text,
-                        controller.address.text,
-                        controller.profilePhotoBase64.value);
+                    if (controller.emailKey.currentState!.validate()) {
+                      SqlHelper.updateItem(
+                          controller.database,
+                          controller.name.text,
+                          controller.phone.text,
+                          controller.email.text,
+                          controller.address.text,
+                          controller.profilePhotoBase64.value);
+                    }
+
                     // controller.loadImage();
                   },
                   style: ElevatedButton.styleFrom(
