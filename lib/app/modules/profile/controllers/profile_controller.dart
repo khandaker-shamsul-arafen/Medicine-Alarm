@@ -15,11 +15,9 @@ class ProfileController extends GetxController {
   final TextEditingController email = TextEditingController();
   final TextEditingController address = TextEditingController();
   RxBool nameValidate = false.obs;
-  RxBool isLoading = true.obs;
   RxList allData = [].obs;
   RxString profilePhotoBase64 = ''.obs;
 
-  RxInt count = 0.obs;
   late Database database;
 
   @override
@@ -36,15 +34,10 @@ class ProfileController extends GetxController {
     ImagePicker().pickImage(source: ImageSource.gallery).then((imgFile) async {
       profilePhotoBase64.value =
           Utility.base64String(await imgFile!.readAsBytes());
-      // Photo Update into Database
-      await loadImage();
-      //refreshImages();
     });
   }
 
   Uint8List loadImage() {
-    print("Hellow Shanto" + profilePhotoBase64.value);
-
     return Utility.dataFromBase64String(profilePhotoBase64.value);
   }
 
@@ -56,7 +49,6 @@ class ProfileController extends GetxController {
     phone.text = allData[0]['phone'];
     address.text = allData[0]['address'];
     profilePhotoBase64.value = allData[0]['image'];
-    print("test" + profilePhotoBase64.value);
   }
 
   @override
@@ -68,6 +60,4 @@ class ProfileController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

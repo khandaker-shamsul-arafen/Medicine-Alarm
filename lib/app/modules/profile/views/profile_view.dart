@@ -26,19 +26,12 @@ class ProfileView extends GetView<ProfileController> {
           physics: const BouncingScrollPhysics(),
           child: Obx(() {
             return Column(
-              //mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GestureDetector(
                   onTap: () {
                     controller.pickImageFromGallery();
                   },
-                  // child: CircleAvatar(
-                  //     radius: 100.r,
-                  //     backgroundImage: controller.loadImage();
-                  //     onBackgroundImageError: (e, s) {
-                  //       debugPrint('image issue, $e,$s');
-                  //     }),
                   child: CircleAvatar(
                     radius: 100.r,
                     backgroundImage: MemoryImage(controller.loadImage()),
@@ -111,120 +104,27 @@ class ProfileView extends GetView<ProfileController> {
                   keyboardType: TextInputType.streetAddress,
                 ),
                 ConstantWidget().gapeH16(),
-                Row(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () async {
-                        // SqlHelper.db();
-                        SqlHelper.databaseCreate();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            AllColors.primaryColor.withOpacity(0.8),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
-                      ),
-                      child: Text(
-                        "Create",
-                        style: AllTextStyle()
-                            .textRegularStyle16(color: AllColors.pureWhite),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        // SqlHelper.createItem();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            AllColors.primaryColor.withOpacity(0.8),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
-                      ),
-                      child: Text(
-                        "Insert",
-                        style: AllTextStyle()
-                            .textRegularStyle16(color: AllColors.pureWhite),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        SqlHelper.updateItem(
-                            controller.database,
-                            controller.name.text,
-                            controller.phone.text,
-                            controller.email.text,
-                            controller.address.text,
-                            controller.profilePhotoBase64.value);
-                        // controller.loadImage();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            AllColors.primaryColor.withOpacity(0.8),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
-                      ),
-                      child: Text(
-                        "Update",
-                        style: AllTextStyle()
-                            .textRegularStyle16(color: AllColors.pureWhite),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () async {
-                        // SqlHelper.db();
-                        //   controller.getItems();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            AllColors.primaryColor.withOpacity(0.8),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
-                      ),
-                      child: Text(
-                        "GEt",
-                        style: AllTextStyle()
-                            .textRegularStyle16(color: AllColors.pureWhite),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        // SqlHelper.db();
-                        SqlHelper.deletedb();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            AllColors.primaryColor.withOpacity(0.8),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
-                      ),
-                      child: Text(
-                        "Delete",
-                        style: AllTextStyle()
-                            .textRegularStyle16(color: AllColors.pureWhite),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        // SqlHelper.db();
-                        SqlHelper.deletedb();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            AllColors.primaryColor.withOpacity(0.8),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
-                      ),
-                      child: Text(
-                        "Delete",
-                        style: AllTextStyle()
-                            .textRegularStyle16(color: AllColors.pureWhite),
-                      ),
-                    ),
-                  ],
+                ElevatedButton(
+                  onPressed: () async {
+                    SqlHelper.updateItem(
+                        controller.database,
+                        controller.name.text,
+                        controller.phone.text,
+                        controller.email.text,
+                        controller.address.text,
+                        controller.profilePhotoBase64.value);
+                    // controller.loadImage();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AllColors.primaryColor.withOpacity(0.8),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)),
+                  ),
+                  child: Text(
+                    "Update",
+                    style: AllTextStyle()
+                        .textRegularStyle16(color: AllColors.pureWhite),
+                  ),
                 ),
               ],
             );
