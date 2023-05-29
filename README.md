@@ -1,5 +1,5 @@
 #This is a Medicine  Alarm App
-Feature: User Get Notification  for Take his Medicine.
+          Feature: User Get Notification  for Take his Medicine.
          User  Select Date And Time Day.
          User Can Search Medicine.
          User Can See  Aclive Alarm For Whole Week.
